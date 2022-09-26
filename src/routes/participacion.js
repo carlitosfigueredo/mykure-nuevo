@@ -5,7 +5,7 @@ const db = require('./../database');
 
 //Metodo listar todos OK
 router.get('/', async(req, res) => {
-    //	idGrupo	idParticipante	idTutor
+
     const grupo = await db.query("SELECT * FROM grupo");
     res.render('grupos/index', { grupo });
 });
@@ -17,19 +17,25 @@ router.get('/todos', async(req, res) => {
 
 //Para agregar
 router.get('/agregar', async(req, res) => {
-    res.render('grupos/agregar');
+    //idGrupo	idParticipante	idTutor
+    const tutor = await db.query("SELECT idTutor,nombreCompletoTutor FROM tutor");
+    const participante = await db.query("SELECT idParticipante,nombreCompletoParticipante,matriculaParticipante FROM participante");
+    const grupo = await db.query("SELECT idGrupo,nombreGrupo FROM grupo");
+    res.render('participacion/agregar', { tutor, participante, grupo });
 });
 
 
 //Metodo Agregar
 router.post('/agregar', async(req, res) => {
-    const { nombreGrupo } = req.body;
-    const newGrupo = {
-        nombreGrupo
+    const { idTutor, idParticipante, idGrupo } = req.body;
+    const newParticipacion = {
+        idGrupo,
+        idParticipante,
+        idTutor
     };
-    await db.query("INSERT INTO grupo SET ?", [newGrupo]);
-    req.flash('success', 'El grupo ha sido creado correctamente');
-    res.redirect('/grupos/todos');
+    await db.query("INSERT INTO grupoDetalles SET ?", [newParticipacion]);
+    req.flash('success', 'La Participacion del alumno ha sido guardada correctamente.');
+    res.redirect('/participacion/todos');
 });
 
 //Metodo Eliminar
