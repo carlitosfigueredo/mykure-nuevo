@@ -3,34 +3,35 @@ const conexion = require('./../database');
 const router = express.Router();
 const db = require('./../database');
 
-
+//Para agregar
 router.get('/agregar', async(req, res) => {
-    const lugar = await db.query("SELECT idLugar,nombreLugar FROM lugar");
-    res.render('ubicaciones/agregar', { lugar });
+    // const lugar = await db.query("SELECT idLugar,nombreLugar FROM lugar");
+    // res.render('ubicaciones/agregar', { lugar });
 });
-//idUbicacion	nombreUbicacion	descripcionUbicacion	idLugar
+
+
 //Metodo Agregar
 router.post('/agregar', async(req, res) => {
-    const { nombreUbicacion, descripcionUbicacion, idLugar } = req.body;
-    const newUbicacion = {
-        nombreUbicacion,
-        descripcionUbicacion,
-        idLugar
-    };
-    await db.query("INSERT INTO ubicacion SET ?", [newUbicacion]);
-    req.flash('success', 'La ubicacion ha sido agregada correctamente.');
-    res.redirect('/ubicaciones/todos');
+    // const { nombreUbicacion, descripcionUbicacion, idLugar } = req.body;
+    // const newUbicacion = {
+    //     nombreUbicacion,
+    //     descripcionUbicacion,
+    //     idLugar
+    // };
+    // await db.query("INSERT INTO ubicacion SET ?", [newUbicacion]);
+    // req.flash('success', 'La ubicacion ha sido agregada correctamente.');
+    // res.redirect('/ubicaciones/todos');
 });
 
 //Metodo listar todos OK
 router.get('/', async(req, res) => {
-    const ubicaciones = await db.query("SELECT idUbicacion,nombreUbicacion,descripcionUbicacion,nombreLugar FROM ubicacion JOIN lugar ON lugar.idLugar = ubicacion.idLugar");
-    res.render('ubicaciones/index', { ubicaciones });
+    // const ubicaciones = await db.query("SELECT idUbicacion,nombreUbicacion,descripcionUbicacion,nombreLugar FROM ubicacion JOIN lugar ON lugar.idLugar = ubicacion.idLugar");
+    // res.render('ubicaciones/index', { ubicaciones });
 });
 
 router.get('/todos', async(req, res) => {
-    const ubicaciones = await db.query("SELECT idUbicacion,nombreUbicacion,descripcionUbicacion,nombreLugar FROM ubicacion JOIN lugar ON lugar.idLugar = ubicacion.idLugar");
-    res.render('ubicaciones/index', { ubicaciones });
+    // const ubicaciones = await db.query("SELECT idUbicacion,nombreUbicacion,descripcionUbicacion,nombreLugar FROM ubicacion JOIN lugar ON lugar.idLugar = ubicacion.idLugar");
+    // res.render('ubicaciones/index', { ubicaciones });
 });
 
 //Metodo Eliminar
