@@ -1,0 +1,31 @@
+<div class="container p-5">
+    <img class="d-block mx-auto" width="100px" src="/img/logo-mykure.png" alt="Logo Mykure">
+    <h6 class="text-center">Mykure Control System</h6>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="/ubicaciones/agregar" method="POST" class="form-control" method="post">
+                <div class="row m-5">
+                    <label for="Nombre del Lugar" class="form-label"> Ingrese el nombre de la Ubicacion a agregar:</label>
+                    <input class="form-control" type="text" name="nombreUbicacion" id="nombreUbicacion" placeholder="Ejemplo: Patio Trasero" autofocus required>
+                </div>
+                <div class="row m-5">
+                    <label for="descripcionUbicacion" class="form-label">Ingrese una descripcion breve de la ubicacion</label>
+                    <textarea required autofocus name="descripcionUbicacion" class="form-control" placeholder="Descripcion Breve" id="descripcionUbicacion" style="height: 100px"></textarea>
+                </div>
+                <div class="row m-5">
+                    <label for="idLugar" class="form-label">Seleccione el Lugar al que pertenece la ubicacion</label>
+                    <select name="idLugar" required class="form-select" aria-label="Lugares">
+                        <option selected>Elegir</option>
+                        {{#each lugar}}
+                        <option value="{{idLugar}}">{{nombreLugar}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                
+                <div class="row m-5">
+                    <button class="btn btn-block btn-success">Agregar nueva ubicacion</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

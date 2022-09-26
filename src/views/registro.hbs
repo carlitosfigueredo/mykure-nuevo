@@ -1,0 +1,37 @@
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <img class="d-block mx-auto" width="100px" src="/img/logo-mykure.png" alt="Logo Mykure" />
+            <h6 class="text-center">Mykure Control System</h6>
+            <h2 class="text-center mb-3">Registro de nuevo usuario</h2>
+            <form action="/registro" method="post" class="form-control">
+                <div class="row mb-2 p-2">
+                    <label class="form-label" for="nombreCompletoAdministrador">Nombre Completo</label>
+                    <input class="form-control" type="text" name="nombreCompletoAdministrador" placeholder="Nombre Apellido" autofocus required>
+                </div>
+                <div class="row mb-2 p-2">
+                    <select name="rolAdministrador" class="form-select" aria-label="Default select example" autofocus required>
+                        <option selected>Elegir rol</option>
+                        <option value="operador">Operador</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+                </div>
+                <div class="row mb-2 p-2">
+                    <label class="form-label" for="correoAdministrador">Email Administrador</label>
+                    <input class="form-control" type="email" name="correoAdministrador" placeholder="correo@ejemplo.com" required>
+                </div>
+                <div class="row mb-2 p-2">
+                    <label class="form-label" for="passwordAdministrador">Contraseña Administrador</label>
+                    <input class="form-control" type="password" name="passwordAdministrador" autofocus required>
+                </div>
+                <div class="row mb-2 p-2">
+                    <button class="btn btn-block btn-success">Registrar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+

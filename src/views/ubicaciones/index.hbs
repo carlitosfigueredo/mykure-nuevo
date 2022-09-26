@@ -1,0 +1,40 @@
+<div class="container p-5">
+  <img
+    class="d-block mx-auto"    width="100px"    src="/img/logo-mykure.png"    alt="Logo Mykure"  />
+  <h6 class="text-center">Mykure Control System</h6>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center">Todos las Ubicaciones</h1>
+      <a href="/ubicaciones/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre de la Ubicacion</th>
+            <th scope="col">Descripcion de la Ubicacion</th>
+            <th scope="col">Lugar Perteneciente</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#each ubicaciones}}
+            <tr>    
+                <th scope="row">{{idUbicacion}}</th>
+                <td class="text-uppercase">{{nombreUbicacion}}</td>
+                <td class="text-uppercase">{{descripcionUbicacion}}</td>
+                <td class="text-uppercase">{{nombreLugar}}</td>
+                <td>
+                    <div class="btn-gruop">
+                        <a href="/ubicaciones/editar/{{idUbicacion}}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="/ubicaciones/eliminar/{{idUbicacion}}" class="btn btn-sm btn-danger">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            {{else}}
+            <h2 class="text-center">No existen registros :(</h2>
+            {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
