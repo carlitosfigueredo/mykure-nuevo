@@ -1,0 +1,37 @@
+<div class="container p-5">
+  <img
+    class="d-block mx-auto"    width="100px"    src="/img/logo-mykure.png"    alt="Logo Mykure"  />
+  <h6 class="text-center">Mykure Control System</h6>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center">Todos los Grupos</h1>
+      <a href="/grupos/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre del Grupo</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#each grupo}}
+            <tr>    
+                <th scope="row">{{idGrupo}}</th>
+                <td class="text-uppercase">{{nombreGrupo}}</td>
+                <td>
+                    <div class="btn-gruop">
+                         <a href="/grupos/ver/{{idGrupo}}" class="btn btn-sm btn-info">Ver Integrantes</a>
+                        <a href="/grupos/editar/{{idGrupo}}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="/grupos/eliminar/{{idGrupo}}" class="btn btn-sm btn-danger">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            {{else}}
+            <h2 class="text-center">No existen registros :(</h2>
+            {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -3,35 +3,33 @@ const conexion = require('./../database');
 const router = express.Router();
 const db = require('./../database');
 
-
-
 //Metodo listar todos OK
 router.get('/', async(req, res) => {
-    const tutor = await db.query("SELECT idTutor,nombreCompletoTutor,cedulaTutor FROM tutor");
-    res.render('tutores/index', { tutor });
+    //	idGrupo	idParticipante	idTutor
+    const grupo = await db.query("SELECT * FROM grupo");
+    res.render('grupos/index', { grupo });
 });
 
 router.get('/todos', async(req, res) => {
-    const tutor = await db.query("SELECT idTutor,nombreCompletoTutor,cedulaTutor FROM tutor");
-    res.render('tutores/index', { tutor });
+    const grupo = await db.query("SELECT * FROM grupo");
+    res.render('grupos/index', { grupo });
 });
 
 //Para agregar
 router.get('/agregar', async(req, res) => {
-    res.render('tutores/agregar');
+    res.render('grupos/agregar');
 });
 
 
 //Metodo Agregar
 router.post('/agregar', async(req, res) => {
-    const { nombreCompletoTutor, cedulaTutor } = req.body;
-    const newTutor = {
-        nombreCompletoTutor,
-        cedulaTutor
+    const { nombreGrupo } = req.body;
+    const newGrupo = {
+        nombreGrupo
     };
-    await db.query("INSERT INTO tutor SET ?", [newTutor]);
-    req.flash('success', 'La ubicacion ha sido agregada correctamente.');
-    res.redirect('/tutores/todos');
+    await db.query("INSERT INTO grupo SET ?", [newGrupo]);
+    req.flash('success', 'El grupo ha sido creado correctamente');
+    res.redirect('/grupos/todos');
 });
 
 //Metodo Eliminar
