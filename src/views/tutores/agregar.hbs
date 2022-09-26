@@ -1,0 +1,23 @@
+<div class="container p-5">
+    <img class="d-block mx-auto" width="100px" src="/img/logo-mykure.png" alt="Logo Mykure">
+    <h6 class="text-center">Mykure Control System</h6>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="/tutores/agregar" method="POST" class="form-control" method="post">
+                <div class="row m-5">
+                    <label for="nombreCompletoTutor" class="form-label"> Ingrese el nombre del tutor</label>
+                    <input class="form-control" type="text" name="nombreCompletoTutor" id="nombreCompletoTutor" placeholder="Ejemplo: Maria Griselda Romero" autofocus required>
+                </div>
+                <div class="row m-5">
+                    <label for="cedulaTutor" class="form-label"> Ingrese cedula del tutor</label>
+                    <div id="cedulaTutorHelp" class="form-text">Por favor ingresar cedula sin puntos.</div>
+                    <input class="form-control" type="number" name="cedulaTutor" id="cedulaTutor" placeholder="Ejemplo: 1234567" autofocus required>
+                </div>
+                
+                <div class="row m-5">
+                    <button class="btn btn-block btn-success">Agregar tutor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

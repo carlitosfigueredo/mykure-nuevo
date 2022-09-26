@@ -54,7 +54,10 @@ app.use(require('./routes/index'));
 app.use(require('./routes/autenticacion'));
 app.use('/lugares', require('./routes/lugares'));
 app.use('/ubicaciones', require('./routes/ubicaciones'));
-
+app.use('/tutores', require('./routes/tutores'));
+app.use('/grupos', require('./routes/grupos'));
+app.use('/participantes', require('./routes/participantes'));
+app.use('/participacion', require('./routes/participacion'));
 
 
 //Publics
