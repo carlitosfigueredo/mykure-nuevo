@@ -30,7 +30,7 @@ router.post('/agregar', async(req, res) => {
         cedulaTutor
     };
     await db.query("INSERT INTO tutor SET ?", [newTutor]);
-    req.flash('success', 'La ubicacion ha sido agregada correctamente.');
+    req.flash('success', 'El/La tutor/a ha sido agregado correctamente');
     res.redirect('/tutores/todos');
 });
 
