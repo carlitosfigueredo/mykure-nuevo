@@ -1,0 +1,19 @@
+<div class="container p-5">
+    <img class="d-block mx-auto" width="100px" src="/img/logo-mykure.png" alt="Logo Mykure">
+    <h6 class="text-center">Mykure Control System</h6>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="/pulseras/agregar" method="POST" class="form-control" method="post">
+                <div class="row m-5">
+                    <label for="codigoPulsera" class="form-label"> Ingrese el codigo de la pulsera</label>
+                    <input class="form-control" type="text" name="codigoPulsera" id="codigoPulsera" placeholder="Ejemplo: 123242141" autofocus required>
+                </div>
+                <input type="hidden" name="estadoPulsera" value="disponible">
+                <input type="hidden" name="PulseraGanador" value="0">
+                <div class="row m-5">
+                    <button class="btn btn-block btn-success">Agregar pulsera</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
