@@ -5,31 +5,36 @@ const db = require('./../database');
 
 //Metodo listar todos OK
 router.get('/', async(req, res) => {
-    const tutor = await db.query("SELECT idTutor,nombreCompletoTutor,cedulaTutor FROM tutor");
-    res.render('tutores/index', { tutor });
+    res.render('eventos/index', );
 });
 
 router.get('/todos', async(req, res) => {
-    const tutor = await db.query("SELECT idTutor,nombreCompletoTutor,cedulaTutor FROM tutor");
-    res.render('tutores/index', { tutor });
+    res.render('eventos/index');
 });
 
-//Para agregar
+//Para agregar idEvento	nombreEvento	fechaEvento	idUbicacion	horarioDesdeEvento	horarioHastaEvento	estadoEvento
+
 router.get('/agregar', async(req, res) => {
-    res.render('tutores/agregar');
+    const ubicacion = await db.query("SELECT idUbicacion,nombreUbicacion,nombreLugar FROM ubicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar");
+    res.render('eventos/agregar', { ubicacion });
 });
 
 
 //Metodo Agregar
 router.post('/agregar', async(req, res) => {
-    const { nombreCompletoTutor, cedulaTutor } = req.body;
-    const newTutor = {
-        nombreCompletoTutor,
-        cedulaTutor
+    console.log(req.body);
+    const { nombreEvento, fechaEvento, idUbicacion, horarioDesdeEvento, horarioHastaEvento, estadoEvento } = req.body;
+    const newEvento = {
+        nombreEvento,
+        fechaEvento,
+        idUbicacion,
+        horarioDesdeEvento,
+        horarioHastaEvento,
+        estadoEvento
     };
-    await db.query("INSERT INTO tutor SET ?", [newTutor]);
-    req.flash('success', 'El/La tutor/a ha sido agregado correctamente');
-    res.redirect('/tutores/todos');
+    await db.query("INSERT INTO evento SET ?", [newEvento]);
+    req.flash('success', 'Evento agregado correctamente');
+    res.redirect('/eventos/todos');
 });
 
 //Metodo Eliminar
