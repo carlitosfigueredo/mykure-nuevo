@@ -57,6 +57,15 @@ router.post('/editar/:id', async(req, res) => {
     // res.redirect('/ubicaciones/todos');
 });
 
+// router.get('/ver/:id', async(req, res) => {
+router.get('/ver/:id', async(req, res) => {
+    const { id } = req.params;
+    const detalleGrupo = await db.query("SELECT nombreCompletoTutor,carreraParticipante,matriculaParticipante,nombreCompletoParticipante  FROM grupo JOIN grupoDetalles ON grupo.idGrupo = grupoDetalles.idGrupo JOIN participante ON participante.idParticipante = grupoDetalles.idParticipante JOIN tutor ON tutor.idTutor = grupoDetalles.idTutor WHERE grupo.idGrupo = ?", [id]);
+    const grupo = await db.query("SELECT nombreGrupo FROM grupo WHERE idGrupo = ? LIMIT 1", [id]);
+    const tutor = await db.query("SELECT nombreCompletoTutor FROM tutor JOIN grupoDetalles ON tutor.idTutor = grupoDetalles.idTutor JOIN grupo ON grupo.idGrupo = grupoDetalles.idGrupo WHERE grupo.idGrupo = ? LIMIT 1", [id]);
+    res.render('grupos/ver', { detalleGrupo, grupo, tutor });
+});
+
 
 //Exportar modulos
 module.exports = router;

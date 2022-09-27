@@ -4,37 +4,37 @@
   <h6 class="text-center">Mykure Control System</h6>
   <div class="row">
     <div class="col-md-12">
-      <h1 class="text-center">Viendo Grupo {{nombreGrupo}}</h1>
       <div class="row">
-        <div class="btn-group">
+        {{!-- <div class="btn-group">
             <a href="/grupos/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo Grupo</a>
             <a href="/tutores/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo Tutor</a>
             <a href="/participantes/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo Participante</a>
-        </div>
+        </div> --}}
+      </div>
+      <div class="row">
+        <h3>Detalles del Grupo</h3>
+        {{#each grupo}}
+        <h5>Nombre del Grupo: {{nombreGrupo}}</h5>
+        {{/each}}
+        {{#each tutor}}
+        <h6>Tutor: {{nombreCompletoTutor}}</h6>
+        {{/each}}
       </div>
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre del Grupo</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Nombre del Alumno</th>
+            <th scope="col">Matricula</th>
+            <th scope="col">Carrera</th>
           </tr>
         </thead>
         <tbody>
-            {{#each grupo}}
-            <tr>    
-                <th scope="row">{{idGrupo}}</th>
-                <td class="text-uppercase">{{nombreGrupo}}</td>
-                <td>
-                    <div class="btn-gruop">
-                         <a href="/grupos/ver/{{idGrupo}}" class="btn btn-sm btn-info">Ver Integrantes</a>
-                        <a href="/grupos/editar/{{idGrupo}}" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="/grupos/eliminar/{{idGrupo}}" class="btn btn-sm btn-danger">Eliminar</a>
-                    </div>
-                </td>
+            {{#each detalleGrupo}}
+            <tr>  
+                <td class="text-uppercase">{{nombreCompletoParticipante}}</td>
+                <td class="text-uppercase">{{matriculaParticipante}}</td>
+                <td class="text-uppercase">{{carreraParticipante}}</td>
             </tr>
-            {{else}}
-            <h2 class="text-center">No existen registros :(</h2>
             {{/each}}
         </tbody>
       </table>
