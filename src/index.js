@@ -60,6 +60,9 @@ app.use('/participantes', require('./routes/participantes'));
 app.use('/participacion', require('./routes/participacion'));
 app.use('/pulseras', require('./routes/pulseras'));
 app.use('/eventos', require('./routes/eventos'));
+app.use('/tipo-persona', require('./routes/tipo-persona'));
+app.use('/personas', require('./routes/personas'));
+
 
 
 
