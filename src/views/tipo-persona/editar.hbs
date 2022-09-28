@@ -1,0 +1,19 @@
+<div class="container p-5">
+    <img class="d-block mx-auto" width="100px" src="/img/logo-mykure.png" alt="Logo Mykure">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="/tipo-persona/editar/{{tipoPersona.idTipoPersona}}" method="POST" class="form-control">
+                <div class="row m-5">
+                    <label for="Nombre del Lugar" class="form-label">Ingrese el tipo de persona a agregar</label>
+                    <input class="form-control" value="{{tipoPersona.descripcionTipoPersona}}" type="text" name="descripcionTipoPersona" id="descripcionTipoPersona" placeholder="Ejemplo: Unida Campus Asuncion" autofocus required>
+                </div>
+                <div class="row m-5">
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-secondary" href="/tipo-persona/todos">Volver</a>
+                        <button class="btn btn-block btn-warning">Editar Lugar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="container p-5">
+  <img
+    class="d-block mx-auto"
+    width="100px"
+    src="/img/logo-mykure.png"
+    alt="Logo Mykure"
+  />
+  <h6 class="text-center">Mykure Control System</h6>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center">Todos los lugares</h1>
+      <a href="/tipo-persona/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#each tipoPersona}}
+            <tr>    
+                <th scope="row">{{idTipoPersona}}</th>
+                <td class="text-uppercase">{{descripcionTipoPersona}}</td>
+                <td>
+                    <div class="btn-gruop">
+                        <a href="/tipo-persona/editar/{{idTipoPersona}}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="/tipo-persona/eliminar/{{idTipoPersona}}" class="btn btn-sm btn-danger">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            {{else}}
+            <h2 class="text-center">No existen registros :(</h2>
+            {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
