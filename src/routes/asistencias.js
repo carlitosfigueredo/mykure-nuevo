@@ -4,7 +4,7 @@ const db = require('../database');
 
 router.get('/agregar', async(req, res) => {
     // const evento
-    res.render('asistencia/agregar');
+    res.render('asistencias/agregar');
 })
 
 //Exportar modulos
