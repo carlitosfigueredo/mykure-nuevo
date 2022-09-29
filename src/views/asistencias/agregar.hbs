@@ -3,32 +3,74 @@
         <div class="col-md-6 offset-md-3">
             <div class="form-control" id="app">
                 <template id="checkPerson" v-if="activePhase == 1">
-                    <div class="row">
+                    <div class="row p-4">
                         <label for="Checkear Tipo Terpson" class="form-label">
                             Por favor indique si el ingresante es alumno
                         </label>
-                        <input type="hidden" name="idEvento" value="1" v-model="asistencia1.idEvento" id="idEvento">
+                        <input type="hidden" name="idEvento" value="1" v-model="checkPerson.idEvento" id="idEvento">
                     </div>
-                    <div class="row">
-                        <button class="btn btn-sm btn-danger mb-3" @click.prevent="goToStep(3)">NO</button>
+                    <div class="row p-4">
+                        <button class="btn-persona" @click.prevent="goToStep(3)">Persona</button>
                     </div>
-                    <div class="row">
-                        <button class="btn btn-sm btn-success" @click.prevent="goToStep(2)">SI</button>
+                    <div class="row p-4">
+                        <button class="btn-alumno" @click.prevent="goToStep(2)">Alumno</button>
                     </div>
                 </template>
                 <template id="useMatricula" v-if="activePhase == 2">
-                    <div class="row">
+                    <div class="row p-4">
                         <label for="Checkear Tipo Terpson" class="form-label">
-                            Seleccione La matricula o busque por nombre o cedula
+                            Seleccione la matricula o busque por Nombre o Cédula
                         </label>
-                        <select name="" id="">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
+                        <select name="idAlumno" id="alumno">
+                            <option value="">Elegir</option>
+                            {{#each alumno}}
+                            <option value="idAlumno">{{matriculaAlumno}} - {{nombreCompletoAlumno}} - {{cedulaAlumno}}</option>
+                            {{/each}}
                         </select>
                     </div>
-                    <div class="row">
-                        <button class="btn btn-sm btn-success" @click.prevent="goToStep(2)">SI</button>
+                    <div class="row p-4">
+                        <button class="btn-continuar" @click.prevent="goToStep(2)">Continuar</button>
+                    </div>
+                    <div class="row p-4">
+                        <button class="btn-volver" @click.prevent="goToStep(1)">Soy bobo me equivoque,
+                            volver atras</button>
+                    </div>
+                </template>
+                <template id="checkRegisterPersonas" v-if="activePhase == 3">
+                    <div class="row p-4">
+                        <label for="Checkear Tipo Terpson" class="form-label">
+                            Por favor pregunte a la persona si ya fue registrado
+                        </label>
+                    </div>
+                    <div class="row p-4">
+                        <button class="btn-no" @click.prevent="goToStep(4)">NO</button>
+                    </div>
+                    <div class="row p-4">
+                        <button class="btn-si" @click.prevent="goToStep(5)">SI</button>
+                    </div>
+                    <div class="row p-4">
+                        <button class="btn-volver" @click.prevent="goToStep(1)">Soy bobo me equivoque,
+                            volver atras</button>
+                    </div>
+                </template>
+                <template id="personaForm" v-if="activePhase == 5">
+                    <div class="row p-4">
+                        <label for="Cargar nueva persona" class="form-label">
+                            Seleccione La matricula o busque por nombre o cedula
+                        </label>
+                        <select name="" id="alumno">
+                            <option value="">Elegir</option>
+                            {{#each alumno}}
+                            <option value="">{{matriculaAlumno}} - {{nombreCompletoAlumno}} - {{cedulaAlumno}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="row p-4">
+                        <button class="btn-continuar" @click.prevent="goToStep(2)">Continuar</button>
+                    </div>
+                    <div class="row p-4">
+                        <button class="btn-volver" @click.prevent="goToStep(1)">Soy bobo me equivoque,
+                            volver atras</button>
                     </div>
                 </template>
             </div>

@@ -1,42 +1,51 @@
-    <script>
-        $(document).ready( function () {
-            $('#datatable').DataTable({
-                language :{
-                    'url': 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json'
-                }
-            });
-        } );
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#idParticipante').select2();
-        });
-        $(document).ready(function() {
-            $('#idTutor').select2();
-        });
-        $(document).ready(function() {
-            $('#idGrupo').select2();
-        });
-        $(document).ready(function() {
-            $('#idUbicacion').select2();
-        });
-    </script>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data:{
-                activePhase:1,
-                asistencia1:{
-                    idEvento: '',
-
-                },
-                asistencia1:{
-                    idEvento: '',
-
-                }
-            },
-            ready: function(){
-                console.log(ready);
+<script>
+    $(document).ready( function () {
+        $('#datatable').DataTable({
+            language :{
+                'url': 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json'
             }
         });
-    </script>
+    } );
+</script>
+<script>
+    $(document).ready(function() {
+        $('#idParticipante').select2();
+    });
+    $(document).ready(function() {
+        $('#idTutor').select2();
+    });
+    $(document).ready(function() {
+        $('#idGrupo').select2();
+    });
+    $(document).ready(function() {
+        $('#idUbicacion').select2();
+    });
+    $(document).ready(function() {
+        $('#alumno').select2();
+    });
+</script>
+<script>
+    Vue.component('checkPerson'),{
+        template:'#checkPerson',
+        props:[
+            'activePhase',
+        ]
+    }
+    var app = new Vue({
+        el: '#app',
+        data:{
+            activePhase:1,
+            checkPerson:{
+                idEvento: '',
+            },
+        },
+        ready: function(){
+            console.log(ready);
+        },
+        methods:{
+            goToStep: function(step){
+                this.activePhase = step;
+            }
+        }
+    });
+</script>
