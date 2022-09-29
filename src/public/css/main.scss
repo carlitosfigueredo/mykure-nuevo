@@ -10,12 +10,9 @@
 body {
     background-image: url('/img/bg.png');
     background-position: center center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
     width: 100vw;
-    height: 100vh;
-    overflow: -moz-hidden-unscrollable;
-    overflow: hidden;
 }
 
 .nav-mykure {
@@ -98,4 +95,82 @@ body {
         text-align: center;
         color: white;
     }
+}
+
+.btn-alumno {
+    background-color: #f472b6;
+    display: flex;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-persona {
+    background-color: #2dd4bf;
+    display: flex;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-continuar {
+    background-color: #22c55e;
+    display: flex;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-si {
+    background-color: #65a30d;
+    display: flex;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-no {
+    background-color: #ef4444;
+    display: flex;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn-volver {
+    background-color: #ca8a04;
+    display: flex;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
 }
