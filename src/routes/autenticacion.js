@@ -15,6 +15,18 @@ router.post('/registro', (req, res) => {
     //console.log(req.body); Para ver el body del request
 });
 
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local.login', {
+        successRedirect: '/index',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req, res, next);
+});
+
 router.get('/index', (req, res) => {
     res.render('index');
 })
