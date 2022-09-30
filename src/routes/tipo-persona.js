@@ -8,14 +8,21 @@ router.get('/agregar', (req, res) => {
 });
 
 //Metodo Agregar
-router.post('/agregar', async(req, res) => {
+router.post('/agregar', async(req, res, next) => {
     const { descripcionTipoPersona } = req.body;
     const newTipoPersona = {
         descripcionTipoPersona
     };
-    await db.query("INSERT INTO tipoPersona SET ?", [newTipoPersona]);
-    req.flash('success', 'El tipo de las personas ha sido agregado correctamente.');
-    res.redirect('/tipo-persona/todos');
+    try {
+        await db.query("INSERT INTO tipoPersona SET ?", [newTipoPersona]);
+        req.flash('success', 'El registro ha sido agregado correctamente.');
+        res.redirect('/tipo-persona/todos');
+    } catch {
+        req.flash('fail', 'No se ha podido agregar. Intente nuevamente en seguida.')
+        console.log(error);
+        next();
+    }
+
 });
 
 //Metodo listar todos
@@ -30,11 +37,17 @@ router.get('/todos', async(req, res) => {
 });
 
 //Metodo Eliminar
-router.get('/eliminar/:id', async(req, res) => {
+router.get('/eliminar/:id', async(req, res, next) => {
     const { id } = req.params;
-    await db.query("DELETE FROM tipoPersona WHERE idTipoPersona = ?", [id]);
-    req.flash('success', 'El tipo de persona ha sido eliminado correctamente.');
-    res.redirect('/tipo-persona/todos');
+    try {
+        await db.query("DELETE FROM tipoPersona WHERE idTipoPersona = ?", [id]);
+        req.flash('success', 'El registro ha sido eliminado correctamente.');
+        res.redirect('/tipo-persona/todos');
+    } catch (error) {
+        req.flash('fail', 'No se ha podido eliminar. Intente nuevamente en seguida.')
+        console.log(error);
+        next();
+    }
 });
 
 //Metodos Editar
@@ -44,15 +57,22 @@ router.get('/editar/:id', async(req, res) => {
     res.render('tipo-persona/editar', { tipoPersona: tipoPersona[0] }); //para ver un solo objeto
 });
 
-router.post('/editar/:id', async(req, res) => {
+router.post('/editar/:id', async(req, res, next) => {
     const { id } = req.params;
     const { descripcionTipoPersona } = req.body;
     const newTipoPersona = {
         descripcionTipoPersona
     };
-    await db.query("UPDATE tipoPersona SET ? WHERE idTipoPersona = ?", [newTipoPersona, id]);
-    req.flash('success', 'El tipo de Persona ha sido editado correctamente.');
-    res.redirect('/tipo-persona/todos');
+    try {
+        await db.query("UPDATE tipoPersona SET ? WHERE idTipoPersona = ?", [newTipoPersona, id]);
+        req.flash('success', 'El registro ha sido editado correctamente.');
+        res.redirect('/tipo-persona/todos');
+    } catch (error) {
+        req.flash('fail', 'No se ha podido editar. Intente nuevamente en seguida.')
+        console.log(error);
+        next();
+    }
+
 });
 
 
