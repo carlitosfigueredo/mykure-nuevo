@@ -7,15 +7,15 @@
             </div>
         </div>
     </div>
-    {{else}}
-    {{#if warning}}
-    <div class="container mt-5">
-        <div class="col-md-4 mx-auto">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>{{warning}}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+{{/if}}
+{{#if message}}
+<div class="container mt-5">
+    <div class="col-md-4 mx-auto">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{fail}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
-    {{/if}}
+</div>
 {{/if}}
+
