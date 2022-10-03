@@ -23,41 +23,74 @@ router.get('/agregar', async(req, res) => {
 
 
 //Metodo Agregar
-router.post('/agregar', async(req, res) => {
+router.post('/agregar', async(req, res, next) => {
     const { nombreCompletoTutor, cedulaTutor } = req.body;
     const newTutor = {
         nombreCompletoTutor,
         cedulaTutor
     };
-    await db.query("INSERT INTO tutor SET ?", [newTutor]);
-    req.flash('success', 'El/La tutor/a ha sido agregado correctamente');
-    res.redirect('/tutores/todos');
+    try {
+        await conexion.query("INSERT INTO tutor SET ?", [newTutor]);
+        req.flash('success', 'Tutor/a agregado correctamente');
+        res.redirect('/tutores/todos');
+    } catch (err) {
+        if (err.code = 'ER_DUP_ENTRY') {
+            req.flash('fail', 'La cedula: ' + cedulaTutor + ' ya existe. Verifique el numero de cedula e intente nuevamente');
+            res.redirect('/tutores/agregar');
+            next();
+        } else {
+            next();
+            req.flash('fail', 'ERROR' + err.code);
+            res.redirect('/tutores/agregar');
+        }
+    }
+
 });
 
 //Metodo Eliminar
-router.get('/eliminar/:id', async(req, res) => {
-    // const { id } = req.params;
-    // await db.query("DELETE FROM lugar WHERE idLugar = ?", [id]);
-    // req.flash('warning', 'El lugar ha sido eliminado correctamente.');
-    // res.redirect('/ubicaciones/todos');
+router.get('/eliminar/:id', async(req, res, next) => {
+    const { id } = req.params;
+    try {
+        await db.query("DELETE FROM tutor WHERE idTutor = ?", [id]);
+        req.flash('warning', 'Tutor eliminado correctamente');
+        res.redirect('/tutores/todos');
+    } catch (err) {
+        console.log(err);
+        req.flash('fail', 'Error' + err.code);
+        next();
+    }
 });
 
 //Metodos Editar
 router.get('/editar/:id', async(req, res) => {
-    // const { id } = req.params;
-    // const lugar = await db.query('SELECT * FROM lugar WHERE idLugar =?', [id]);
-    // res.render('ubicaciones/editar', { lugar: lugar[0] }); //para ver un solo objeto
+    const { id } = req.params;
+    const tutor = await db.query('SELECT * FROM tutor WHERE idTutor =?', [id]);
+    res.render('tutores/editar', { tutor: tutor[0] }); //para ver un solo objeto
 });
 
-router.post('/editar/:id', async(req, res) => {
-    // const { id } = req.params;
-    // const { nombreLugar } = req.body;
-    // const newLugar = {
-    //     nombreLugar
-    // };
-    // await db.query("UPDATE lugar SET ? WHERE idLugar = ?", [newLugar, id]);
-    // req.flash('success', 'El lugar ha sido editado correctamente.');
-    // res.redirect('/ubicaciones/todos');
+router.post('/editar/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const { nombreCompletoTutor, cedulaTutor } = req.body;
+    const newTutor = {
+        nombreCompletoTutor,
+        cedulaTutor
+    };
+    try {
+        await db.query("UPDATE tutor SET ? WHERE idTutor = ?", [newTutor, id]);
+        req.flash('info', 'El tutor ha sido editado correctamente.');
+        res.redirect('/tutores/todos');
+    } catch (err) {
+        if (err.code = 'ER_DUP_ENTRY') {
+            req.flash('fail', 'La cedula: ' + cedulaTutor + ' ya existe. Verifique el numero de cedula e intente nuevamente');
+            res.redirect('/tutores/agregar');
+            next();
+        } else {
+            req.flash('fail', 'Error' + err.code);
+            next();
+        }
+    }
+
+
 });
 
 

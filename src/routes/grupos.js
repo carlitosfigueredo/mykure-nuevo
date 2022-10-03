@@ -40,7 +40,6 @@ router.post('/agregar', async(req, res, next) => {
     try {
         await db.query("INSERT INTO grupo SET ?", [newGrupo]);
         req.flash('success', 'El grupo ha sido creado correctamente');
-        console.log(db.query);
         res.redirect('/grupos/todos');
 
     } catch (error) {
@@ -52,7 +51,7 @@ router.post('/agregar', async(req, res, next) => {
 });
 
 //Metodo Eliminar
-router.get('/eliminar/:id', async(req, res) => {
+router.get('/eliminar/:id', async(req, res, next) => {
     const { id } = req.params;
     try {
         await db.query("DELETE FROM grupo WHERE idGrupo = ?", [id]);
@@ -67,10 +66,17 @@ router.get('/eliminar/:id', async(req, res) => {
 });
 
 //Metodos Editar
-router.get('/editar/:id', async(req, res) => {
+router.get('/editar/:id', async(req, res, next) => {
     const { id } = req.params;
-    const grupo = await db.query('SELECT * FROM grupo WHERE idGrupo =?', [id]);
-    res.render('grupos/editar', { grupo: grupo[0] }); //para ver un solo objeto
+    try {
+        const grupo = await db.query('SELECT * FROM grupo WHERE idGrupo =?', [id]);
+        res.render('grupos/editar', { grupo: grupo[0] }); //para ver un solo objeto
+    } catch (error) {
+        console.log(error);
+        req.flash('fail', 'Error al recuperar id y datos del grupo');
+        next();
+    }
+
 });
 
 router.post('/editar/:id', async(req, res, next) => {
