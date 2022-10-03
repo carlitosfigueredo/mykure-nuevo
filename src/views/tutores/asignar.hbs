@@ -1,0 +1,24 @@
+<div class="container p-5">
+    <img class="d-block mx-auto" width="100px" src="/img/logo-mykure.png" alt="Logo Mykure">
+    <h6 class="text-center">Mykure Control System</h6>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <p class="text-center">Asignar grupo a tutor: {{tutor.nombreCompletoTutor}}</p>
+            <form action="/tutores/asignar" method="POST" class="form-control" method="post">
+                <div class="row">
+                    <label for="idGrupo" class="form-label"></label>
+                    <select name="idGrupo" class="form-select" id="idGrupo">
+                        <option value="">Elegir</option>
+                        {{#each grupos}}
+                            <option value="{{idGrupo}}">{{nombreGrupo}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <input type="hidden" value="{{tutor.idTutor}}" name="idTutor">
+                <div class="row m-5">
+                    <button class="btn btn-block btn-success">Asignar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

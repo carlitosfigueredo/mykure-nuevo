@@ -89,8 +89,63 @@ router.post('/editar/:id', async(req, res, next) => {
             next();
         }
     }
+});
+
+router.get('/asignar/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const grupos = await db.query('SELECT * FROM grupo');
+    try {
+        const tutor = await db.query('SELECT * FROM tutor WHERE idTutor = ?', [id]);
+        res.render('tutores/asignar', { grupos, tutor: tutor[0] });
+    } catch (err) {
+        console.log(err);
+        next();
+    }
+});
+
+router.post('/asignar', async(req, res, next) => {
+    const { idGrupo, idTutor } = req.body;
+    console.log(req.body);
+    newTutoria = {
+        idTutor,
+        idGrupo
+    }
+    try {
+        await db.query('INSERT INTO tutoria SET ?', [newTutoria]);
+        req.flash('success', 'Tutor asignado correctamente al grupo');
+        res.redirect('/tutores/asignaciones/' + idTutor);
+    } catch (err) {
+        console.log(err)
+        req.flash('fail', 'Error' + err.code);
+        next();
+    }
+});
+
+router.get('/asignaciones/:id', async(req, res, next) => {
+    const { id } = req.params;
+    try {
+        const tutor = await db.query('SELECT * FROM tutor WHERE idTutor = ?', [id]);
+        const asignaciones = await db.query('SELECT * FROM tutor JOIN tutoria on tutor.idTutor = tutoria.idTutor JOIN grupo ON grupo.idGrupo = tutoria.idGrupo WHERE tutor.idTutor = ?', [id]);
+        res.render('tutores/asignaciones', { asignaciones, tutor: tutor[0] });
+    } catch (err) {
+        console.log(err)
+        req.flash('fail', 'Error' + err.code);
+        next();
+    }
+});
 
 
+router.get('/asignar/editar/:id', async(req, res, next) => {
+    const { id } = req.params;
+    try {
+        const tutor = await db.query('SELECT * FROM tutor WHERE idTutor = ?', [id]);
+        const asignaciones = await db.query('SELECT * FROM tutor JOIN tutoria on tutor.idTutor = tutoria.idTutor JOIN grupo ON grupo.idGrupo = tutoria.idGrupo WHERE tutor.idTutor = ?', [id]);
+        res.render('tutores/asignaciones', { asignaciones, tutor: tutor[0] });
+    } catch (err) {
+        console.log(err)
+        req.flash('fail', 'Error' + err.code);
+        next();
+    }
 });
 
 

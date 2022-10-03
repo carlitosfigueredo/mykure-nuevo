@@ -97,6 +97,36 @@ router.post('/editar/:id', async(req, res, next) => {
     }
 });
 
+router.get('/asignar/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const grupo = await db.query('SELECT * FROM grupo WHERE idGrupo =?', [id]);
+    try {
+        const tutores = await db.query('SELECT * FROM tutor');
+        res.render('grupos/asignar', { tutores, grupo: grupo[0] });
+    } catch (err) {
+        console.log(err);
+        next();
+    }
+});
+
+router.post('/asignar', async(req, res, next) => {
+    const { idGrupo, idTutor } = req.body;
+    console.log(req.body);
+    newTutoria = {
+        idTutor,
+        idGrupo
+    }
+    try {
+        await db.query('INSERT INTO tutoria SET ?', [newTutoria]);
+        req.flash('success', 'Tutor asignado correctamente al grupo');
+        res.redirect('/grupos/ver/' + idGrupo);
+    } catch (err) {
+        console.log(err)
+        req.flash('fail', 'Error' + err.code);
+        next();
+    }
+});
+
 // router.get('/ver/:id', async(req, res) => {
 router.get('/ver/:id', async(req, res, next) => {
     const { id } = req.params;
@@ -109,7 +139,6 @@ router.get('/ver/:id', async(req, res, next) => {
         console.log(error);
         next();
     }
-
 });
 
 
