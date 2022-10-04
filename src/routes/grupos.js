@@ -6,7 +6,7 @@ const db = require('./../database');
 //Metodo listar todos OK
 router.get('/', async(req, res) => {
     try {
-        const grupo = await db.query("SELECT * FROM grupo");
+        const grupo = await db.query("SELECT * FROM grupo JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo JOIN tutor ON tutoria.idTutor = tutor.idTutor");
         res.render('grupos/index', { grupo });
     } catch (error) {
         console.log(error);
@@ -16,7 +16,7 @@ router.get('/', async(req, res) => {
 
 router.get('/todos', async(req, res, next) => {
     try {
-        const grupo = await db.query("SELECT * FROM grupo");
+        const grupo = await db.query("SELECT * FROM grupo JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo JOIN tutor ON tutoria.idTutor = tutor.idTutor");
         res.render('grupos/index', { grupo });
     } catch (error) {
         console.log(error);

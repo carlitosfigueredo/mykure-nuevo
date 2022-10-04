@@ -1,7 +1,104 @@
 <div class="container p-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="form-control" id="app">
+            <p>
+                <a class="btn-alumno" data-bs-toggle="collapse" href="#formularioAlumno" role="button"
+                    aria-expanded="false" aria-controls="formularioAlumno">Alumno</a>
+                <a class="btn-persona" data-bs-toggle="collapse" href="#formularioPersonaNoRegistrada" role="button"
+                    aria-expanded="false" aria-controls="formularioPersona">Persona No Registrada</a>
+                <a class="btn-persona" data-bs-toggle="collapse" href="#formularioPersona" role="button"
+                    aria-expanded="false" aria-controls="formularioPersona">Persona</a>
+            </p>
+            <div class="row">
+                <div class="collapse col-lg-12" id="formularioAlumno">
+                    <p class="text-center">Formulario de ingreso alumno</p>
+                    <form class="form-control" action="">
+                        <div class="row m-1">
+                            <label for="matricula">Ingrese la matricula</label>
+                            <input type="number" name="matricula" id="matricula">
+                        </div>
+                    </form>
+                </div>
+                <div class="collapse col-lg-12" id="formularioPersonaNoRegistrada">
+                    <p class="text-center">Formulario de ingreso persona a {{evento.nombreEvento}}</p>
+                    {{!-- idAsistenciaEvento idPersona idPulsera idEvento fechaHoraCreacion --}}
+                    {{!-- idPersona nombreCompletoPersona cedulaPersona sexoPersona idTipoPersona --}}
+                    <form class="form-control" action="/asistencias/agregar/{{evento.idEvento}}" method="post">
+                        <input type="hidden" name="idEvento" value="{{evento.idEvento}}">
+                        <div class="row m-1">
+                            <label class="form-label" for="nombreCompletoPersona">Nombre Completo Persona</label>
+                            <input class="form-control" type="text" name="nombreCompletoPersona" id="nombreCompletoPersona" required autofocus>
+                        </div>
+                        <div class="row m-1">
+                            <label class="form-label" for="cedulaPersona">Cedula o identificacion de la persona</label>
+                            <input class="form-control" type="text" name="cedulaPersona" id="cedulaPersona" required>
+                        </div>
+                        <div class="row m-1">
+                            <label class="form-label" for="sexoPersona">Nombre Completo Persona</label>
+                            <select class="form-select" name="sexoPersona" id="sexoPersona" required>
+                                <option value="">Elegir Sexo</option>
+                                <option value="F">Femenino</option>
+                                <option value="M">Masculino</option>
+                            </select>
+                        </div>
+                        <div class="row m-1">
+                            <div class="col-md-6">
+                                <label class="form-label" for="idTipoPersona">Elija el tipo de Persona</label>
+                                <select class="form-select" name="idTipoPersona" id="idTipoPersona" required>
+                                    <option value="">Elegir Tipo persona</option>
+                                    {{#each tipoPersona}}
+                                    <option value="{{idTipoPersona}}">{{descripcionTipoPersona}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="nombreCompletoPersona">Elegir Pulsera asignada</label>
+                                <select class="form-select" name="idPulsera" id="idPulsera" required>
+                                    <option value="">Elegir Pulsera</option>
+                                    {{#each pulsera}}
+                                    <option value="{{idPulsera}}">{{codigoPulsera}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="row mt-3 mb-2">
+                            <button class="btn btn-block btn-success">Agregar Persona</button>
+                        </div>
+                    </form>
+                </div>
+                 <div class="collapse col-lg-12" id="formularioPersonaNoRegistrada">
+                    <p class="text-center">Formulario de ingreso persona a {{evento.nombreEvento}}</p>
+                    {{!-- idAsistenciaEvento idPersona idPulsera idEvento fechaHoraCreacion --}}
+                    {{!-- idPersona nombreCompletoPersona cedulaPersona sexoPersona idTipoPersona --}}
+                    <form class="form-control" action="/asistencias/agregar/{{evento.idEvento}}" method="post">
+                        <input type="hidden" name="idEvento" value="{{evento.idEvento}}">
+                        <div class="row m-1">
+                            <label class="form-label" for="nombreCompletoPersona">Elegir Pulsera asignada</label>
+                            <select class="form-select" name="idPulsera" id="idPulsera" required>
+                                <option value="">Elegir Pulsera</option>
+                                {{#each persona}}
+                                <option value="{{idPersona}}">{{nombreCompletoPersona}} + {{cedulaPersona}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="row m-1">
+                            <label class="form-label" for="nombreCompletoPersona">Elegir Pulsera asignada</label>
+                            <select class="form-select" name="idPulsera" id="idPulsera" required>
+                                <option value="">Elegir Pulsera</option>
+                                {{#each pulsera}}
+                                <option value="{{idPulsera}}">{{codigoPulsera}}</option>
+                                {{/each}}
+                            </select>
+                        </div> 
+                        <div class="row mt-3 mb-2">
+                            <button class="btn btn-block btn-success">Agregar Persona</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            {{!-- <div class="form-control" id="app">
                 <template id="checkPerson" v-if="activePhase == 1">
                     <div class="row p-4">
                         <label for="Checkear Tipo Terpson" class="form-label">
@@ -24,7 +121,8 @@
                         <select name="idAlumno" id="alumno">
                             <option value="">Elegir</option>
                             {{#each alumno}}
-                            <option value="idAlumno">{{matriculaAlumno}} - {{nombreCompletoAlumno}} - {{cedulaAlumno}}</option>
+                            <option value="idAlumno">{{matriculaAlumno}} - {{nombreCompletoAlumno}} - {{cedulaAlumno}}
+                            </option>
                             {{/each}}
                         </select>
                     </div>
@@ -73,7 +171,7 @@
                             volver atras</button>
                     </div>
                 </template>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

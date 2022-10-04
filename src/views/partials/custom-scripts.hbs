@@ -1,51 +1,32 @@
 <script>
-    $(document).ready( function () {
+    $(document).ready(function () {
         $('#datatable').DataTable({
-            language :{
+            language: {
                 'url': 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json'
             }
         });
-    } );
+    });
 </script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#idParticipante').select2();
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#idTutor').select2();
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#idGrupo').select2();
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#idUbicacion').select2();
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#alumno').select2();
     });
-</script>
-<script>
-    Vue.component('checkPerson'),{
-        template:'#checkPerson',
-        props:[
-            'activePhase',
-        ]
-    }
-    var app = new Vue({
-        el: '#app',
-        data:{
-            activePhase:1,
-            checkPerson:{
-                idEvento: '',
-            },
-        },
-        ready: function(){
-            console.log(ready);
-        },
-        methods:{
-            goToStep: function(step){
-                this.activePhase = step;
-            }
-        }
+    $(document).ready(function () {
+        $('#idPulsera').select2();
+    });
+    $(document).ready(function () {
+        $('#idTipoPersona').select2();
     });
 </script>
