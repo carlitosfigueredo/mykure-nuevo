@@ -36,7 +36,7 @@ router.get('/agregar', async(req, res) => {
 //Metodo Agregar
 router.post('/agregar', async(req, res) => {
     console.log(req.body);
-    const { nombreEvento, fechaEvento, idUbicacion, horarioDesdeEvento, horarioHastaEvento, estadoEvento } = req.body;
+    const { nombreEvento, fechaEvento, idUbicacion, estadoEvento } = req.body;
     const newEvento = {
         nombreEvento,
         fechaEvento,
@@ -51,6 +51,14 @@ router.post('/agregar', async(req, res) => {
         console.log(err);
         req.flash('fail', 'Error. ' + err.code);
     }
+
+});
+
+router.get('/asistencia/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id]);
+    const asistencia = await db.query('SELECT * FROM ')
+    res.render('/eventos/asistencia', { evento: evento[0], asistencia });
 
 });
 
