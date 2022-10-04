@@ -8,7 +8,7 @@
         </div>
     </div>
 {{/if}}
-{{#if message}}
+{{#if fail}}
 <div class="container mt-5">
     <div class="col-md-4 mx-auto">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -18,4 +18,23 @@
     </div>
 </div>
 {{/if}}
-
+{{#if warning}}
+<div class="container mt-5">
+    <div class="col-md-4 mx-auto">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{warning}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#if info}}
+<div class="container mt-5">
+    <div class="col-md-4 mx-auto">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>{{info}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{{/if}}

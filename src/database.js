@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const { database } = require('./config');
 const { promisify } = require('util');
+const mysql2 = require('mysql2-promise');
 const conexion = mysql.createPool(database);
 conexion.getConnection((err, connection) => {
     if (err) {

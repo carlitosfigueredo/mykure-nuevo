@@ -46,6 +46,9 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
     app.locals.success = req.flash('success');
+    app.locals.fail = req.flash('fail');
+    app.locals.warning = req.flash('warning');
+    app.locals.info = req.flash('info');
     next();
 })
 
@@ -60,11 +63,10 @@ app.use('/participantes', require('./routes/participantes'));
 app.use('/participacion', require('./routes/participacion'));
 app.use('/pulseras', require('./routes/pulseras'));
 app.use('/eventos', require('./routes/eventos'));
+app.use('/eventos-secundarios', require('./routes/eventos-secundarios'));
 app.use('/tipo-persona', require('./routes/tipo-persona'));
 app.use('/personas', require('./routes/personas'));
 app.use('/asistencias', require('./routes/asistencias'));
-
-
 
 
 

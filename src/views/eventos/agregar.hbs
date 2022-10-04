@@ -9,7 +9,7 @@
                     <input class="form-control" type="text" name="nombreEvento" id="nombreEvento" placeholder="Ejemplo: Semana Ingenieria - Dia 1" autofocus required>
                 </div>
                 <div class="form-control mb-3">
-                    <label for="idUbicacion" class="form-label"> Seleccione la ubicacion del eveneto</label>
+                    <label for="idUbicacion" class="form-label"> Seleccione la ubicacion del evento</label>
                     <select name="idUbicacion" id="idUbicacion" class="form-select" required>
                         <option value="">Elegir</option>
                         {{#each ubicacion}}
@@ -18,18 +18,10 @@
                     </select>
                 </div>
                 <div class="form-control mb-3">
-                    <label for="fechaEvento" class="form-label"> Ingrese el nombre del evento  <i class="bi bi-calendar-event"></i></label>
+                    <label for="fechaEvento" class="form-label"> Ingrese la fecha del evento</label>
                     <input class="form-control" type="date" name="fechaEvento" id="fechaEvento" placeholder="Ejemplo: 2022-09-27" autofocus required>
                 </div>
-                <div class="form-control mb-3">
-                    <label for="horarioDesdeEvento" class="form-label">Ingrese la Hora de Inicio<i class="bi bi-calendar-event"></i></label>
-                    <input class="form-control" type="datetime-local" name="horarioDesdeEvento" id="horarioDesdeEvento" placeholder="Ejemplo: 2022-09-27" autofocus required>
-                </div>
-                <div class="form-control mb-3">
-                    <label for="horarioHastaEvento" class="form-label">Ingrese la Hora de Termino<i class="bi bi-calendar-event"></i></label>
-                    <input class="form-control" type="datetime-local" name="horarioHastaEvento" id="horarioHastaEvento" placeholder="Ejemplo: 2022-09-27" autofocus required>
-                </div>
-                <input type="hidden" name="estadoEvento" value="proximamente">
+                <input type="hidden" name="estadoEvento" value="en proceso">
                 <div class="row mb-3">
                     <button class="btn btn-block btn-success">Agregar Evento</button>
                 </div>

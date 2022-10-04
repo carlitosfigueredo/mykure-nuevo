@@ -1,0 +1,36 @@
+<div class="container p-5">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="text-center">Todos los Eventos Secundarios</h1>
+			<a href="/eventos-secundarios/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo Evento</a>
+            {{#if eventosSecundarios}}
+			<table class="table" id="datatable">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nombre del Evento Secundario</th>
+						<th scope="col">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each eventosSecundarios}}
+					<tr>
+						<th scope="row">{{idEventoSecundario}}</th>
+						<td class="text-uppercase">{{nombreEventoSecundario}}</td>
+						<td>
+							<div class="btn-gruop">
+								<a href="/eventos/ver/{{idevento}}" class="btn btn-sm btn-info">Ver Grupos Participantes</a>
+								<a href="/eventos/editar/{{idevento}}" class="btn btn-sm btn-warning">Editar evento</a>
+								<a href="/eventos/eliminar/{{idevento}}" class="btn btn-sm btn-danger">Eliminar evento</a>
+							</div>
+						</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+            {{else}}
+				<h2 class="text-center">No existen registros :(</h2>
+            {{/if}}
+		</div>
+	</div>
+</div>

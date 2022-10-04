@@ -5,4 +5,10 @@ module.exports = {
         password: 'UdaelwYkOkM5TSq',
         database: 'unida_evento3'
     }
+    // database: {
+    //     host: 'localhost',
+    //     user: 'root',
+    //     password: 'HolaManola$$2020',
+    //     database: 'unida_evento3'
+    // }
 };

@@ -1,0 +1,32 @@
+<div class="container p-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center">Tutoria Profesor: {{tutor.nombreCompletoTutor}}</h1>
+      <a href="/tutores/asignar/{{tutor.idTutor}}" class="btn btn-block btn-success mb-5">Agregar nuevo grupo para este Tutor</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Grupo</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#each asignaciones}}
+            <tr>    
+                <th scope="row">{{nombreGrupo}}</th>
+                <td>
+                    <div class="btn-gruop">
+                        <a href="/grupos/ver/{{idGrupo}}" class="btn btn-sm btn-info">Ver Grupo</a>
+                        <a href="/tutores/asignaciones/editar/{{idGrupo}}" class="btn btn-sm btn-warning">Editar Asignacion de Tutor</a>
+                        <a href="/tutores/eliminar/{{idTutor}}" class="btn btn-sm btn-danger">Eliminar Tutor del Grupo</a>
+                    </div>
+                </td>
+            </tr>
+            {{else}}
+            <h2 class="text-center">No existen registros :(</h2>
+            {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
