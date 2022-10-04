@@ -111,6 +111,11 @@ body {
     border: none;
 }
 
+.btn-alumno:hover {
+    color: white;
+    background-color: #be185d;
+}
+
 .btn-persona {
     background-color: #2dd4bf;
     display: flex;
@@ -123,6 +128,15 @@ body {
     text-align: center;
     border-radius: 5px;
     border: none;
+}
+
+.btn-persona:hover {
+    color: white;
+    background-color: #0f766e;
+}
+
+select {
+    flex-direction: column;
 }
 
 .btn-continuar {

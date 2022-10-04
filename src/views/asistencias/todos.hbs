@@ -1,0 +1,39 @@
+<div class="container p-5">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="text-center">Asistencia Evento: {{evento.nombreEvento}}</h1>
+			<a href="/asistencias/agregar/{{evento.idEvento}}" class="btn btn-block btn-success mb-5">Agregar nuevo</a>
+			<table class="table" id="datatable">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nombre Persona</th>
+						<th scope="col">Cedula de la Persona</th>
+						<th scope="col">Sexo</th>
+                        <th scope="col">Tipo de Persona</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each persona}}
+					<tr>
+						<th scope="row">{{idPersona}}</th>
+						<td class="text-uppercase">{{nombreCompletoPersona}}</td>
+						<td class="text-uppercase">{{cedulaPersona}}</td>
+                        <td class="text-uppercase">{{sexoPersona}}</td>
+                        <td class="text-uppercase">{{descripcionTipoPersona}}</td>
+						<td>
+							<div class="btn-gruop">
+								<a href="/grupos/ver/{{idGrupo}}" class="btn btn-sm btn-info">Ver Integrantes</a>
+								<a href="/grupos/editar/{{idGrupo}}" class="btn btn-sm btn-warning">Editar Grupo</a>
+								<a href="/grupos/eliminar/{{idGrupo}}" class="btn btn-sm btn-danger">Eliminar Grupo</a>
+							</div>
+						</td>
+					</tr>
+					{{else}}
+					<h2 class="text-center">No existen registros :(</h2>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
