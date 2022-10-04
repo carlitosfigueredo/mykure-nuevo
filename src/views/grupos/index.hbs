@@ -1,6 +1,4 @@
 <div class="container p-5">
-	<img class="d-block mx-auto" width="100px" src="/img/logo-mykure.png" alt="Logo Mykure" />
-	<h6 class="text-center">Mykure Control System</h6>
 	<div class="row">
 		<div class="col-md-12">
 			<h1 class="text-center">Todos los Grupos</h1>
@@ -10,6 +8,7 @@
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">Nombre del Grupo</th>
+						<th scope="col">Tutor del Grupo</th>
 						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
@@ -18,11 +17,12 @@
 					<tr>
 						<th scope="row">{{idGrupo}}</th>
 						<td class="text-uppercase">{{nombreGrupo}}</td>
+						<td class="text-uppercase">{{nombreCompletoTutor}}</td>
 						<td>
 							<div class="btn-gruop">
 								<a href="/grupos/ver/{{idGrupo}}" class="btn btn-sm btn-info">Ver Integrantes</a>
-								<a href="/grupos/editar/{{idGrupo}}" class="btn btn-sm btn-warning">Editar</a>
-								<a href="/grupos/eliminar/{{idGrupo}}" class="btn btn-sm btn-danger">Eliminar</a>
+								<a href="/grupos/editar/{{idGrupo}}" class="btn btn-sm btn-warning">Editar Grupo</a>
+								<a href="/grupos/eliminar/{{idGrupo}}" class="btn btn-sm btn-danger">Eliminar Grupo</a>
 							</div>
 						</td>
 					</tr>

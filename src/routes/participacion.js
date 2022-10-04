@@ -27,7 +27,7 @@ router.get('/agregar', async(req, res) => {
 
 //Metodo Agregar
 router.post('/agregar', async(req, res) => {
-    const { idTutor, idParticipante, idGrupo } = req.body;
+    const { idParticipante, idGrupo } = req.body;
     const newParticipacion = {
         idGrupo,
         idParticipante,

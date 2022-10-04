@@ -6,7 +6,7 @@ const db = require('./../database');
 //Metodo listar todos OK
 router.get('/', async(req, res) => {
     try {
-        const grupo = await db.query("SELECT * FROM grupo");
+        const grupo = await db.query("SELECT * FROM grupo JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo JOIN tutor ON tutoria.idTutor = tutor.idTutor");
         res.render('grupos/index', { grupo });
     } catch (error) {
         console.log(error);
@@ -16,7 +16,7 @@ router.get('/', async(req, res) => {
 
 router.get('/todos', async(req, res, next) => {
     try {
-        const grupo = await db.query("SELECT * FROM grupo");
+        const grupo = await db.query("SELECT * FROM grupo JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo JOIN tutor ON tutoria.idTutor = tutor.idTutor");
         res.render('grupos/index', { grupo });
     } catch (error) {
         console.log(error);
@@ -40,7 +40,6 @@ router.post('/agregar', async(req, res, next) => {
     try {
         await db.query("INSERT INTO grupo SET ?", [newGrupo]);
         req.flash('success', 'El grupo ha sido creado correctamente');
-        console.log(db.query);
         res.redirect('/grupos/todos');
 
     } catch (error) {
@@ -52,7 +51,7 @@ router.post('/agregar', async(req, res, next) => {
 });
 
 //Metodo Eliminar
-router.get('/eliminar/:id', async(req, res) => {
+router.get('/eliminar/:id', async(req, res, next) => {
     const { id } = req.params;
     try {
         await db.query("DELETE FROM grupo WHERE idGrupo = ?", [id]);
@@ -67,10 +66,17 @@ router.get('/eliminar/:id', async(req, res) => {
 });
 
 //Metodos Editar
-router.get('/editar/:id', async(req, res) => {
+router.get('/editar/:id', async(req, res, next) => {
     const { id } = req.params;
-    const grupo = await db.query('SELECT * FROM grupo WHERE idGrupo =?', [id]);
-    res.render('grupos/editar', { grupo: grupo[0] }); //para ver un solo objeto
+    try {
+        const grupo = await db.query('SELECT * FROM grupo WHERE idGrupo =?', [id]);
+        res.render('grupos/editar', { grupo: grupo[0] }); //para ver un solo objeto
+    } catch (error) {
+        console.log(error);
+        req.flash('fail', 'Error al recuperar id y datos del grupo');
+        next();
+    }
+
 });
 
 router.post('/editar/:id', async(req, res, next) => {
@@ -91,6 +97,36 @@ router.post('/editar/:id', async(req, res, next) => {
     }
 });
 
+router.get('/asignar/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const grupo = await db.query('SELECT * FROM grupo WHERE idGrupo =?', [id]);
+    try {
+        const tutores = await db.query('SELECT * FROM tutor');
+        res.render('grupos/asignar', { tutores, grupo: grupo[0] });
+    } catch (err) {
+        console.log(err);
+        next();
+    }
+});
+
+router.post('/asignar', async(req, res, next) => {
+    const { idGrupo, idTutor } = req.body;
+    console.log(req.body);
+    newTutoria = {
+        idTutor,
+        idGrupo
+    }
+    try {
+        await db.query('INSERT INTO tutoria SET ?', [newTutoria]);
+        req.flash('success', 'Tutor asignado correctamente al grupo');
+        res.redirect('/grupos/ver/' + idGrupo);
+    } catch (err) {
+        console.log(err)
+        req.flash('fail', 'Error' + err.code);
+        next();
+    }
+});
+
 // router.get('/ver/:id', async(req, res) => {
 router.get('/ver/:id', async(req, res, next) => {
     const { id } = req.params;
@@ -103,7 +139,6 @@ router.get('/ver/:id', async(req, res, next) => {
         console.log(error);
         next();
     }
-
 });
 
 

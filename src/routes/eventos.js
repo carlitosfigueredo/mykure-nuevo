@@ -4,12 +4,25 @@ const router = express.Router();
 const db = require('./../database');
 
 //Metodo listar todos OK
-router.get('/', async(req, res) => {
-    res.render('eventos/index', );
+router.get('/', async(req, res, next) => {
+    try {
+        const eventos = await db.query('SELECT * FROM evento JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar ');
+        console.log(eventos);
+        res.render('eventos/index', { eventos });
+    } catch (err) {
+        console.log(err);
+        next();
+    }
 });
 
 router.get('/todos', async(req, res) => {
-    res.render('eventos/index');
+    try {
+        const eventos = await db.query('SELECT * FROM evento JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar ');
+        res.render('eventos/index', { eventos });
+    } catch (err) {
+        console.log(err);
+        next();
+    }
 });
 
 //Para agregar idEvento	nombreEvento	fechaEvento	idUbicacion	horarioDesdeEvento	horarioHastaEvento	estadoEvento
@@ -28,13 +41,17 @@ router.post('/agregar', async(req, res) => {
         nombreEvento,
         fechaEvento,
         idUbicacion,
-        horarioDesdeEvento,
-        horarioHastaEvento,
         estadoEvento
     };
-    await db.query("INSERT INTO evento SET ?", [newEvento]);
-    req.flash('success', 'Evento agregado correctamente');
-    res.redirect('/eventos/todos');
+    try {
+        await db.query("INSERT INTO evento SET ?", [newEvento]);
+        req.flash('success', 'Evento agregado correctamente');
+        res.redirect('/eventos/todos');
+    } catch (err) {
+        console.log(err);
+        req.flash('fail', 'Error. ' + err.code);
+    }
+
 });
 
 //Metodo Eliminar
