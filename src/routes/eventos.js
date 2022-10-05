@@ -57,9 +57,14 @@ router.post('/agregar', async(req, res) => {
 router.get('/asistencia/:id', async(req, res, next) => {
     const { id } = req.params;
     const evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id]);
-    const asistencia = await db.query('SELECT * FROM ')
-    res.render('/eventos/asistencia', { evento: evento[0], asistencia });
+    const asistencia = await db.query('SELECT * FROM asistenciaEvento JOIN persona ON asistenciaEvento.idPersona = persona.idPersona JOIN pulsera ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento = ?', [id]);
+    res.render('eventos/asistencia', { evento: evento[0], asistencia });
 
+});
+
+router.get('/sorteo/evento/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const pulseras = await db.query('');
 });
 
 //Metodo Eliminar

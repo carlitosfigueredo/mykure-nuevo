@@ -10,7 +10,7 @@ router.get('/agregar/evento/:id', async(req, res, next) => {
         const tipoPersona = await db.query('SELECT idTipoPersona,descripcionTipoPersona FROM tipoPersona');
         const pulsera = await db.query('SELECT * FROM pulsera WHERE estadoPulsera = "disponible"');
         const alumno = await db.query('SELECT * FROM alumno');
-        const personaRegistrada = await db.query('SELECT * FROM persona WHERE persona.idPersona NOT IN (SELECT persona.idPersona FROM asistenciaEvento JOIN persona ON asistenciaEvento.idPersona = persona.idPersona JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento = ?)', [id]);
+        const personaRegistrada = await db.query('SELECT *,alumno.matriculaAlumno FROM persona JOIN alumno ON alumno.cedulaAlumno = persona.cedulaPersona  WHERE persona.idPersona NOT IN (SELECT persona.idPersona FROM asistenciaEvento JOIN persona ON asistenciaEvento.idPersona = persona.idPersona JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento = ?)', [id]);
         res.render('asistencias/agregar', { tipoPersona, pulsera, evento: evento[0], personaRegistrada, alumno });
     } catch (error) {
         console.log(error);
@@ -48,7 +48,7 @@ router.post('/agregar/evento/:id', async(req, res, next) => {
         await db.query('COMMIT');
         console.log('commit realizado');
         req.flash('success', 'Persona y evento agregado.');
-        res.redirect('/asistencias/agregar/' + idEvento);
+        res.redirect('/asistencias/agregar/evento/' + idEvento);
     } catch (err) {
         console.log(err);
         if (err.code === 'ER_DUP_ENTRY') {
@@ -75,7 +75,7 @@ router.post('/agregar/registrados/evento/:id', async(req, res, next) => {
         await db.query('COMMIT');
         console.log('commit realizado');
         req.flash('success', 'Asistencia Registrada');
-        res.redirect('/asistencias/agregar/' + idEvento);
+        res.redirect('/asistencias/agregar/evento/' + idEvento);
     } catch (err) {
         console.log(err);
         if (err.code === 'ER_DUP_ENTRY') {
@@ -100,7 +100,7 @@ router.post('/agregar/alumno/registrados/evento/:id', async(req, res, next) => {
         await db.query('COMMIT');
         console.log('commit realizado');
         req.flash('success', 'Asistencia Registrada');
-        res.redirect('/asistencias/agregar/' + idEvento);
+        res.redirect('/asistencias/agregar/evento/' + idEvento);
     } catch (err) {
         console.log(err);
         if (err.code === 'ER_DUP_ENTRY') {

@@ -1,33 +1,29 @@
 <div class="container p-5">
 	<div class="row">
 		<div class="col-md-12">
-			<h1 class="text-center">Todos los Eventos</h1>
-			<a href="/eventos/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo Evento</a>
-            {{#if eventos}}
+			<h1 class="text-center">Asistencia a evento {{evento.nombreEvento}}</h1>
+			{{!-- <a href="/eventos/agregar" class="btn btn-block btn-success mb-5">Agregar Asistencias</a> --}}
+            {{#if asistencia}}
 			<table class="table" id="datatable">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">Nombre del Evento</th>
-						<th scope="col">Fecha del Evento</th>
-                        <th scope="col">Ubicacion del Evento</th>
+						<th scope="col">Nombre de la persona</th>
+						<th scope="col">Cedula</th>
+                        <th scope="col">Pulsera</th>
 						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
-					{{#each eventos}}
+					{{#each asistencia}}
 					<tr>
-						<th scope="row">{{idEvento}}</th>
-						<td class="text-uppercase">{{nombreEvento}}</td>
-                        <td class="text-uppercase">{{fechaEvento}}</td>
-						<td class="text-uppercase">{{nombreLugar}} - {{nombreUbicacion}}</td>
+						<th scope="row">{{idPersona}}</th>
+						<td class="text-uppercase">{{nombreCompletoPersona}}</td>
+                        <td class="text-uppercase">{{cedulaPersona}}</td>
+						<td class="text-uppercase">{{codigoPulsera}}</td>
 						<td>
 							<div class="btn-gruop">
-								<a href="/asistencias/agregar/evento/{{idEvento}}" class="btn btn-sm btn-success">Cargar Asistencia</a>
-								<a href="/eventos/ver/{{idEvento}}" class="btn btn-sm btn-info">Ver Eventos Secundarios</a>
-								<a href="/eventos/asistencia/{{idEvento}}" class="btn btn-sm btn-info">Ver Asistencia</a>
-								<a href="/eventos/editar/{{idEvento}}" class="btn btn-sm btn-warning">Editar evento</a>
-								<a href="/eventos/eliminar/{{idEvento}}" class="btn btn-sm btn-danger">Eliminar evento</a>
+								
 							</div>
 						</td>
 					</tr>
