@@ -28,20 +28,24 @@
 				<div class="col-md-3">
 					<div class="shadow p-3 mb-5 bg-body rounded">
 						<div class="reports-titles-green">
-							<p>Persona</p>
+							<p>Pulseras entregadas</p>
 						</div>
 						<div class="reports-content">
-
+							{{#if pulseras}}
+							<h2 class="text-center mt-4">{{pulseras.entregadas}}</h2>
+							{{/if}}
 						</div>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="shadow p-3 mb-5 bg-body rounded">
 						<div class="reports-titles-red">
-							<p>Persona</p>
+							<p>Ganancias del dia</p>
 						</div>
-						<div class="reports-content">
-
+						<div class="reports-content line">
+							{{#if ganancias}}
+							<h2 class="text-center mt-4">{{ganancias.gananciaPulsera}}</h2>
+							{{/if}}
 						</div>
 					</div>
 				</div>
@@ -51,7 +55,9 @@
 							<p>Personas registradas</p>
 						</div>
 						<div class="reports-content">
-
+							{{#if personasRegistradas}}
+							<h2 class="text-center mt-4">{{personasRegistradas.registradas}}</h2>
+							{{/if}}
 						</div>
 					</div>
 				</div>
