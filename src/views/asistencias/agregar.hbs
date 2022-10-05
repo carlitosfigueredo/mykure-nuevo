@@ -3,7 +3,7 @@
         <div class="col-md-8 offset-md-2">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="text-center p-4 m-2">Formulario de compra de pulsera para evento</h2>
+                    <h2 class="text-center p-4 m-2">Formulario de compra de pulsera para evento {{evento.nombreEvento}}</h2>
                     <p class="text-center">Haga click en la opcion que necesita usar</p>
                     <div class="row">
                         <div class="col-md-12">
@@ -36,7 +36,7 @@
             </div>
             <div class="row">
                 <div class="collapse col-lg-12" id="formularioAlumno">
-                    <p class="text-center">Formulario de ingreso alumno comprador de pulsera del evento: {{evento.nombreEvento}}</p>
+                    <p class="text-center">Alumno comprador de pulsera del evento: {{evento.nombreEvento}}</p>
                     <form class="shadow p-3 mb-5 bg-body rounded" action="/asistencias/agregar/alumno/registrados/evento/{{evento.idEvento}}" method="post">
                         <input type="hidden" name="idEvento" value="{{evento.idEvento}}">
                         <div class="shadow p-3 mb-5 rounded">
@@ -66,7 +66,7 @@
                     </form>
                 </div>
                 <div class="collapse col-lg-12" id="formularioPersonaNoRegistrada">
-                    <p class="text-center">Formulario de ingreso persona a {{evento.nombreEvento}}</p>
+                    <p class="text-center">Compra de pulsera: {{evento.nombreEvento}} - Persona Comun</p>
                     <form class="shadow p-3 mb-5 rounded" action="/asistencias/agregar/evento/{{evento.idEvento}}" method="post">
                         <input type="hidden" name="idEvento" value="{{evento.idEvento}}">
                         <div class="shadow p-3 mb-2 rounded">
@@ -110,7 +110,7 @@
                     </form>
                 </div>
                 <div class="collapse col-lg-12" id="formularioPersonaRegistrada">
-                    <p class="text-center">Formulario de ingreso persona Registrada a {{evento.nombreEvento}}</p>
+                    <p class="text-center">Compra pulsera para evento: {{evento.nombreEvento}} - Persona Registrada</p>
                     <form class="shadow p-3 mb-5 rounded" action="/asistencias/agregar/registrados/evento/{{evento.idEvento}}"
                         method="post">
                         <input type="hidden" name="idEvento" value="{{evento.idEvento}}">

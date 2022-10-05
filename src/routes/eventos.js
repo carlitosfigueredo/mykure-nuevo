@@ -62,6 +62,11 @@ router.get('/asistencia/:id', async(req, res, next) => {
 
 });
 
+router.get('/sorteo/evento/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const pulseras = await db.query('');
+});
+
 //Metodo Eliminar
 router.get('/eliminar/:id', async(req, res) => {
     // const { id } = req.params;
