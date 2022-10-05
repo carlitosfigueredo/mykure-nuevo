@@ -14,21 +14,22 @@
           </tr>
         </thead>
         <tbody>
-            {{#each participante}}
-            <tr>    
-                <th scope="row">{{idParticipante}}</th>
-                <td class="text-uppercase">{{nombreCompletoParticipante}}</td>
-                <td class="text-uppercase">{{matriculaParticipante}}</td>
-                <td>
-                    <div class="btn-gruop">
-                        <a href="/participantes/editar/{{idParticipante}}" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="/participantes/eliminar/{{idParticipante}}" class="btn btn-sm btn-danger">Eliminar</a>
-                    </div>
-                </td>
-            </tr>
-            {{else}}
-            <h2 class="text-center">No existen registros :(</h2>
-            {{/each}}
+          {{#each participante}}
+          <tr>
+            <th scope="row">{{idParticipante}}</th>
+            <td class="text-uppercase">{{nombreCompletoParticipante}}</td>
+            <td class="text-uppercase">{{matriculaParticipante}}</td>
+            <td class="text-uppercase">{{carreraParticipante}}</td>
+            <td>
+              <div class="btn-gruop">
+                <a href="/participantes/editar/{{idParticipante}}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="/participantes/eliminar/{{idParticipante}}" class="btn btn-sm btn-danger">Eliminar</a>
+              </div>
+            </td>
+          </tr>
+          {{else}}
+          <h2 class="text-center">No existen registros :(</h2>
+          {{/each}}
         </tbody>
       </table>
     </div>
