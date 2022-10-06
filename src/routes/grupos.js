@@ -6,7 +6,8 @@ const db = require('./../database');
 //Metodo listar todos OK
 router.get('/', async(req, res) => {
     try {
-        const grupo = await db.query("SELECT * FROM grupo JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo JOIN tutor ON tutoria.idTutor = tutor.idTutor");
+        const tutor = 2;
+        const grupo = await db.query("SELECT * FROM grupo LEFT JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo LEFT JOIN tutor ON tutoria.idTutor = tutor.idTutor");
         res.render('grupos/index', { grupo });
     } catch (error) {
         console.log(error);
@@ -16,7 +17,7 @@ router.get('/', async(req, res) => {
 
 router.get('/todos', async(req, res, next) => {
     try {
-        const grupo = await db.query("SELECT * FROM grupo JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo JOIN tutor ON tutoria.idTutor = tutor.idTutor");
+        const grupo = await db.query("SELECT * FROM grupo LEFT JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo LEFT JOIN tutor ON tutoria.idTutor = tutor.idTutor");
         res.render('grupos/index', { grupo });
     } catch (error) {
         console.log(error);
@@ -131,10 +132,11 @@ router.post('/asignar', async(req, res, next) => {
 router.get('/ver/:id', async(req, res, next) => {
     const { id } = req.params;
     try {
-        const detalleGrupo = await db.query("SELECT nombreCompletoTutor,carreraParticipante,matriculaParticipante,nombreCompletoParticipante  FROM grupo JOIN grupoDetalles ON grupo.idGrupo = grupoDetalles.idGrupo JOIN participante ON participante.idParticipante = grupoDetalles.idParticipante JOIN tutor ON tutor.idTutor = grupoDetalles.idTutor WHERE grupo.idGrupo = ?", [id]);
-        const grupo = await db.query("SELECT nombreGrupo FROM grupo WHERE idGrupo = ? LIMIT 1", [id]);
-        const tutor = await db.query("SELECT nombreCompletoTutor FROM tutor JOIN grupoDetalles ON tutor.idTutor = grupoDetalles.idTutor JOIN grupo ON grupo.idGrupo = grupoDetalles.idGrupo WHERE grupo.idGrupo = ? LIMIT 1", [id]);
-        res.render('grupos/ver', { detalleGrupo, grupo, tutor });
+        const integrantes = await db.query("SELECT * FROM participante JOIN participacion ON participante.idParticipante = participacion.idParticipante JOIN grupo ON grupo.idGrupo = participacion.idGrupo WHERE grupo.idGrupo =? ", [id]);
+        // const grupo = await db.query("SELECT nombreGrupo FROM grupo WHERE idGrupo = ? LIMIT 1", [id]);
+        // const tutor = await db.query("SELECT nombreCompletoTutor FROM tutor JOIN grupoDetalles ON tutor.idTutor = grupoDetalles.idTutor JOIN grupo ON grupo.idGrupo = grupoDetalles.idGrupo WHERE grupo.idGrupo = ? LIMIT 1", [id]);
+        const grupo = await db.query("SELECT * FROM grupo WHERE grupo.idGrupo = ?", [id]);
+        res.render('grupos/ver', { integrantes, grupo: grupo[0] });
     } catch (error) {
         console.log(error);
         next();

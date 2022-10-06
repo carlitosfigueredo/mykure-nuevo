@@ -3,7 +3,9 @@
     <h6 class="text-center">Mykure Control System</h6>
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form action="/participacion/agregar" method="POST" class="form-control" method="post">
+            <form action="/participacion/agregar/alumno/grupo/{{grupo.idGrupo}}" method="POST" class="shadow p-3 mb-5 bg-body rounded">
+            <p class="text-center">Agregando participante para Grupo: {{grupo.nombreGrupo}}</p>
+                <input type="hidden" name="idGrupo" value="{{grupo.idGrupo}}">
                 <div class="row m-5">
                     <label for="idParticipante" class="form-label">Seleccione nombre del alumno</label>
                     <select name="idParticipante" id="idParticipante" required class="form-select" aria-label="Participante">
@@ -13,26 +15,6 @@
                         {{/each}}
                     </select>
                 </div>
-                <div class="row m-5">
-                    <label for="idGrupo" class="form-label">Seleccione el nombre del grupo</label>
-                    <select name="idGrupo" id="idGrupo" required class="form-select" aria-label="Grupo">
-                        <option selected>Elegir</option>
-                        {{#each grupo}}
-                        <option value="{{idGrupo}}">{{nombreGrupo}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-
-                <div class="row m-5">
-                    <label for="idTutor" class="form-label">Seleccione el Tutor del grupo</label>
-                    <select name="idTutor" id="idTutor" required class="form-select" aria-label="Tutor">
-                        <option selected>Elegir</option>
-                        {{#each tutor}}
-                        <option value="{{idTutor}}">{{nombreCompletoTutor}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                
                 <div class="row m-5">
                     <button class="btn btn-block btn-success">Agregar Participacion</button>
                 </div>

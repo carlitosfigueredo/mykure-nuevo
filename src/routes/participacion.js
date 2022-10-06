@@ -3,46 +3,47 @@ const conexion = require('./../database');
 const router = express.Router();
 const db = require('./../database');
 
-//Metodo listar todos OK
-router.get('/', async(req, res) => {
 
-    const grupo = await db.query("SELECT * FROM grupo");
-    res.render('grupos/index', { grupo });
-});
-
-router.get('/todos', async(req, res) => {
-    const grupo = await db.query("SELECT * FROM grupo");
-    res.render('grupos/index', { grupo });
-});
-
-//Para agregar
-router.get('/agregar', async(req, res) => {
-    //idGrupo	idParticipante	idTutor
-    const tutor = await db.query("SELECT idTutor,nombreCompletoTutor FROM tutor");
-    const participante = await db.query("SELECT idParticipante,nombreCompletoParticipante,matriculaParticipante FROM participante");
-    const grupo = await db.query("SELECT idGrupo,nombreGrupo FROM grupo");
-    res.render('participacion/agregar', { tutor, participante, grupo });
+router.get('/agregar/alumno/grupo/:id', async(req, res) => {
+    // idParticipante	idGrupo
+    const { id } = req.params;
+    try {
+        participante = await db.query('SELECT * FROM participante');
+        grupo = await db.query('SELECT * FROM grupo WHERE idGrupo = ?', [id]);
+        res.render('participacion/agregar', { participante, grupo: grupo[0] });
+    } catch (err) {
+        req.flash('fail', 'Error al obtener datos');
+        next();
+    }
 });
 
 
 //Metodo Agregar
-router.post('/agregar', async(req, res) => {
+router.post('/agregar/alumno/grupo/:id', async(req, res, next) => {
     const { idParticipante, idGrupo } = req.body;
     const newParticipacion = {
         idGrupo,
         idParticipante,
-        idTutor
     };
-    await db.query("INSERT INTO grupoDetalles SET ?", [newParticipacion]);
-    req.flash('success', 'La Participacion del alumno ha sido guardada correctamente.');
-    res.redirect('/participacion/todos');
+    try {
+        await db.query('start transaction');
+        await db.query("INSERT INTO participacion SET ?", [newParticipacion]);
+        await db.query('commit');
+        req.flash('success', 'La Participacion del alumno ha sido guardada correctamente.');
+        res.redirect('/participacion/agregar/alumno/grupo/' + idGrupo);
+    } catch (err) {
+        await db.query('rollback');
+        req.flash('fail', 'Error: ' + err.code + '\nYa existe esta misma persona en el grupo. Asigne a otro grupo o verifique correctamente.');
+        res.redirect('/participacion/agregar/alumno/grupo/' + idGrupo);
+        next();
+    }
 });
 
 //Metodo Eliminar
 router.get('/eliminar/:id', async(req, res) => {
     // const { id } = req.params;
     // await db.query("DELETE FROM lugar WHERE idLugar = ?", [id]);
-    // req.flash('warning', 'El lugar ha sido eliminado correctamente.');
+    // req.flas[h('warning', 'El lugar ha sido eliminado correctamente.');
     // res.redirect('/ubicaciones/todos');
 });
 

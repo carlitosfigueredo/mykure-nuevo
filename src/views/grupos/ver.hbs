@@ -13,9 +13,7 @@
       </div>
       <div class="row">
         <h3>Detalles del Grupo</h3>
-        {{#each grupo}}
-        <h5>Nombre del Grupo: {{nombreGrupo}}</h5>
-        {{/each}}
+        <h5>Nombre del Grupo: {{grupo.nombreGrupo}}</h5>
         {{#each tutor}}
         <h6>Tutor: {{nombreCompletoTutor}}</h6>
         {{/each}}
@@ -29,7 +27,7 @@
           </tr>
         </thead>
         <tbody>
-            {{#each detalleGrupo}}
+            {{#each integrantes}}
             <tr>  
                 <td class="text-uppercase">{{nombreCompletoParticipante}}</td>
                 <td class="text-uppercase">{{matriculaParticipante}}</td>
