@@ -6,7 +6,6 @@
 			<table class="table" id="datatable">
 				<thead>
 					<tr>
-						<th scope="col">#</th>
 						<th scope="col">Nombre del Grupo</th>
 						<th scope="col">Tutor del Grupo</th>
 						<th scope="col">Acciones</th>
@@ -15,9 +14,12 @@
 				<tbody>
 					{{#each grupo}}
 					<tr>
-						<th scope="row">{{idGrupo}}</th>
 						<td class="text-uppercase">{{nombreGrupo}}</td>
+						{{#if nombreCompletoTutor}}
 						<td class="text-uppercase">{{nombreCompletoTutor}}</td>
+						{{else}}
+						<td class="text-uppercase">grupo sin tutor</td>
+						{{/if}}
 						<td>
 							<div class="btn-gruop">
 								<a href="/grupos/ver/{{idGrupo}}" class="btn btn-sm btn-info">Ver Integrantes</a>
