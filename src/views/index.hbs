@@ -17,11 +17,27 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="shadow p-3 mb-5 bg-body rounded">
-						<div class="reports-titles-blue">
-							<p>Persona</p>
+						<div class="reports-titles-purple">
+							<p>Grupos</p>
 						</div>
 						<div class="reports-content">
-
+							{{#if cuentaGrupos}}
+							<h2 class="text-center mt-4">{{cuentaGrupos.cuentaGrupos}}</h2>
+							{{else}}
+							<h2 class="text-center mt-4">Todavia no hay grupos registrados</h2>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="shadow p-3 mb-5 bg-body rounded">
+						<div class="reports-titles-blue">
+							<p>Participantes</p>
+						</div>
+						<div class="reports-content">
+							{{#if cuentaParticipantes}}
+							<h2 class="text-center mt-4">{{cuentaParticipantes.cuentaParticipante}}</h2>
+							{{/if}}
 						</div>
 					</div>
 				</div>
@@ -49,18 +65,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3">
-					<div class="shadow p-3 mb-5 bg-body rounded">
-						<div class="reports-titles-purple">
-							<p>Personas registradas</p>
-						</div>
-						<div class="reports-content">
-							{{#if personasRegistradas}}
-							<h2 class="text-center mt-4">{{personasRegistradas.registradas}}</h2>
-							{{/if}}
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
@@ -70,7 +74,8 @@
 						</div>
 						<div class="row">
 							{{#each eventos}}
-							<p>{{nombreEvento}}<a href="/asistencias/agregar/evento/{{idEvento}}" class="btn btn-sm btn-success">Registrar asistencia</a></p>
+							<p>{{nombreEvento}}<a href="/asistencias/agregar/evento/{{idEvento}}"
+									class="btn btn-sm btn-success">Registrar asistencia</a></p>
 							{{/each}}
 						</div>
 					</div>
