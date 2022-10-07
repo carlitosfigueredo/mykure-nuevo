@@ -6,7 +6,7 @@ const db = require('./../database');
 //Metodo listar todos OK
 router.get('/', async(req, res, next) => {
     try {
-        const eventos = await db.query('SELECT * FROM evento JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar ');
+        const eventos = await db.query('SELECT * FROM evento JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar');
         console.log(eventos);
         res.render('eventos/index', { eventos });
     } catch (err) {
@@ -15,10 +15,10 @@ router.get('/', async(req, res, next) => {
     }
 });
 
-router.get('/todos', async(req, res) => {
+router.get('/todos', async(req, res, next) => {
     try {
-        const eventos = await db.query('SELECT * FROM evento JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar ');
-        res.render('eventos/index', { eventos });
+        const eventos = await db.query('SELECT * FROM evento JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar');
+        res.render('eventos/todos', { eventos });
     } catch (err) {
         console.log(err);
         next();
@@ -68,29 +68,57 @@ router.get('/sorteo/evento/:id', async(req, res, next) => {
 });
 
 //Metodo Eliminar
-router.get('/eliminar/:id', async(req, res) => {
-    // const { id } = req.params;
-    // await db.query("DELETE FROM lugar WHERE idLugar = ?", [id]);
-    // req.flash('warning', 'El lugar ha sido eliminado correctamente.');
-    // res.redirect('/ubicaciones/todos');
+router.get('/eliminar/:id', async(req, res, next) => {
+    const { id } = req.params;
+    try {
+        await db.query("DELETE FROM evento WHERE idEvento = ?", [id]);
+        req.flash('warning', 'El evento ha sido eliminado correctamente.');
+        res.redirect('/eventos');
+    } catch (err) {
+        console.log(err);
+        req.flash('fail', 'Error. ' + err.code);
+        next();
+    };
 });
 
+router.get('/terminar/:id', async(req, res, next) => {
+
+});
 //Metodos Editar
-router.get('/editar/:id', async(req, res) => {
+router.get('/editar/:id', async(req, res, next) => {
+    const { id } = req.params;
+    try {
+        const ubicacion = await db.query("SELECT idUbicacion,nombreUbicacion,nombreLugar FROM ubicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar");
+        evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id]);
+        res.render('eventos/editar', { evento: evento[0], ubicacion })
+    } catch (err) {
+        console.log(err);
+        req.flash('fail', 'Error. ' + err.code);
+    }
     // const { id } = req.params;
     // const lugar = await db.query('SELECT * FROM lugar WHERE idLugar =?', [id]);
     // res.render('ubicaciones/editar', { lugar: lugar[0] }); //para ver un solo objeto
 });
 
-router.post('/editar/:id', async(req, res) => {
-    // const { id } = req.params;
-    // const { nombreLugar } = req.body;
-    // const newLugar = {
-    //     nombreLugar
-    // };
-    // await db.query("UPDATE lugar SET ? WHERE idLugar = ?", [newLugar, id]);
-    // req.flash('success', 'El lugar ha sido editado correctamente.');
-    // res.redirect('/ubicaciones/todos');
+router.post('/editar/:id', async(req, res, next) => {
+    const { id } = req.params;
+    console.log(req.body);
+    const { nombreEvento, fechaEvento, idUbicacion, estadoEvento } = req.body;
+    const newEvento = {
+        nombreEvento,
+        fechaEvento,
+        idUbicacion,
+        estadoEvento
+    };
+    try {
+        await db.query("UPDATE evento SET ? WHERE idEvento = ?", [newEvento, id]);
+        req.flash('warning', 'Evento editado correctamente');
+        res.redirect('/eventos/todos');
+    } catch (err) {
+        console.log(err);
+        req.flash('fail', 'Error. ' + err.code);
+        next();
+    }
 });
 
 

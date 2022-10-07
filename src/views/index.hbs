@@ -63,10 +63,15 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-6">
 					<div class="shadow p-3 mb-5 bg-body rounded">
 						<div class="reports-titles-purple">
 							<p>Eventos Activos</p>
+						</div>
+						<div class="row">
+							{{#each eventos}}
+							<p>{{nombreEvento}}<a href="/asistencias/agregar/evento/{{idEvento}}" class="btn btn-sm btn-success">Registrar asistencia</a></p>
+							{{/each}}
 						</div>
 					</div>
 				</div>

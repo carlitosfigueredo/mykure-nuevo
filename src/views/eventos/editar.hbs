@@ -1,0 +1,38 @@
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="/eventos/editar/{{evento.idEvento}}" method="POST" class="shadow p-3 mb-5 bg-body rounded">
+                <p class="text-center">Editando Evento: {{evento.nombreEvento}}</p>
+                <div class="row mb-3">
+                    <label for="nombreEvento" class="form-label"> Ingrese el nombre del evento</label>
+                    <input class="form-control" value="{{evento.nombreEvento}}" type="text" name="nombreEvento" id="nombreEvento" placeholder="Ejemplo: Semana Ingenieria - Dia 1" autofocus required>
+                </div>
+                <div class="row mb-3">
+                    <label for="idUbicacion" class="form-label"> Seleccione la ubicacion del evento</label>
+                    <select name="idUbicacion" id="idUbicacion" class="form-select" required>
+                        <option value="">Elegir</option>
+                        {{#each ubicacion}}
+                            <option value="{{idUbicacion}}">{{nombreUbicacion}} - {{nombreLugar}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="row mb-3">
+                    <label for="fechaEvento" class="form-label"> Ingrese la fecha del evento</label>
+                    <input class="form-control" type="date" value="{{evento.fechaEvento}}" name="fechaEvento" id="fechaEvento" placeholder="Ejemplo: 2022-09-27" autofocus required>
+                </div>
+                <div class="row mb-3">
+                    <label for="estadoEvento" class="form-label"> Seleccione la ubicacion del evento</label>
+                    <select name="estadoEvento" id="estadoEvento" value="{{evento.estadoEvento}}" class="form-select" required>
+                        <option value="">Elegir</option>
+                        <option value="en proceso">En proceso</option>
+                        <option value="proximamente">Proximamente</option>
+                        <option value="terminado">Terminado</option>
+                    </select>
+                </div>
+                <div class="row mb-3">
+                    <button class="btn btn-block btn-success">Editar Evento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
