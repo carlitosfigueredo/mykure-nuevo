@@ -1,0 +1,18 @@
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="/pulseras/editar/{{pusera.idPulsera}}" method="POST" class="form-control" method="post">
+            <p class="text-center">Editando Pulsera: {{pulsera.codigoPulsera}}</p>
+                <div class="row m-5">
+                    <label for="codigoPulsera" class="form-label"> Edite el codigo de la pulsera</label>
+                    <input class="form-control" type="text" value="{{pulsera.codigoPulsera}}" name="codigoPulsera" id="codigoPulsera" placeholder="Ejemplo: 123242141" autofocus required>
+                </div>
+                <input type="hidden" name="estadoPulsera" value="disponible">
+                <input type="hidden" name="PulseraGanador" value="0">
+                <div class="row m-5">
+                    <button class="btn btn-block btn-success">Editar pulsera</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
