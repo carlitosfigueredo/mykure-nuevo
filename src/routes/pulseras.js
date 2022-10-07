@@ -21,13 +21,13 @@ router.get('/agregar', async(req, res) => {
 //Metodo Agregar //Metodo listar todos OK idPulsera	codigoPulsera	estadoPulsera	PulseraGanador
 router.post('/agregar', async(req, res, next) => {
     const { codigoPulsera, estadoPulsera, PulseraGanador } = req.body;
-    const newTutor = {
+    const newPulsera = {
         codigoPulsera,
         estadoPulsera,
         PulseraGanador
     };
     try {
-        await db.query("INSERT INTO pulsera SET ?", [newTutor]);
+        await db.query("INSERT INTO pulsera SET ?", [newPulsera]);
         req.flash('success', 'Pulsera agregada correctamente.');
         res.redirect('/pulseras/todos');
     } catch (err) {
@@ -44,7 +44,7 @@ router.get('/eliminar/:id', async(req, res) => {
     try {
         await db.query("DELETE FROM pulsera WHERE idPulsera = ?", [id]);
         req.flash('warning', 'La pulsera ha sido eliminado correctamente.');
-        res.redirect('/ubicaciones/todos');
+        res.redirect('/pulseras/todos');
 
     } catch (err) {
         req.flash('fail', 'No se puede eliminar' + err.code)
@@ -62,13 +62,13 @@ router.get('/editar/:id', async(req, res) => {
 router.post('/editar/:id', async(req, res) => {
     const { id } = req.params;
     const { codigoPulsera, estadoPulsera, PulseraGanador } = req.body;
-    const newTutor = {
+    const newPulsera = {
         codigoPulsera,
         estadoPulsera,
         PulseraGanador
     };
     try {
-        await db.query("UPDATE pulsera SET ? WHERE idPulsera = ?", [newTutor, id]);
+        await db.query("UPDATE pulsera SET ? WHERE idPulsera = ?", [newPulsera, id]);
         req.flash('warning', 'Pulsera editada correctamente.');
         res.redirect('/pulseras/todos');
     } catch (err) {
