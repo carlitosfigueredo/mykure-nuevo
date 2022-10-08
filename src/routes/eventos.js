@@ -6,9 +6,9 @@ const db = require('./../database');
 //Metodo listar todos OK
 router.get('/', async(req, res, next) => {
     try {
-        const eventos = await db.query('SELECT * FROM evento JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar');
+        const eventos = await db.query('SELECT * FROM evento LEFT JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion LEFT JOIN lugar ON ubicacion.idLugar = lugar.idLugar');
         console.log(eventos);
-        res.render('eventos/index', { eventos });
+        res.render('eventos/todos', { eventos });
     } catch (err) {
         console.log(err);
         next();
@@ -17,7 +17,7 @@ router.get('/', async(req, res, next) => {
 
 router.get('/todos', async(req, res, next) => {
     try {
-        const eventos = await db.query('SELECT * FROM evento JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion JOIN lugar ON ubicacion.idLugar = lugar.idLugar');
+        const eventos = await db.query('SELECT * FROM evento LEFT JOIN ubicacion ON evento.idUbicacion = evento.idUbicacion LEFT JOIN lugar ON ubicacion.idLugar = lugar.idLugar');
         res.render('eventos/todos', { eventos });
     } catch (err) {
         console.log(err);
