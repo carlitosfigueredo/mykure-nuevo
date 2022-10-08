@@ -9,9 +9,8 @@ router.get('/agregar/evento/:id', async(req, res, next) => {
         const evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id])
         const tipoPersona = await db.query('SELECT idTipoPersona,descripcionTipoPersona FROM tipoPersona');
         const pulsera = await db.query('SELECT * FROM pulsera WHERE estadoPulsera = "disponible"');
-        const alumno = await db.query('SELECT * FROM alumno');
         const personaRegistrada = await db.query('SELECT *,alumno.matriculaAlumno FROM persona JOIN alumno ON alumno.cedulaAlumno = persona.cedulaPersona  WHERE persona.idPersona NOT IN (SELECT persona.idPersona FROM asistenciaEvento JOIN persona ON asistenciaEvento.idPersona = persona.idPersona JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento = ?)', [id]);
-        res.render('asistencias/agregar', { tipoPersona, pulsera, evento: evento[0], personaRegistrada, alumno });
+        res.render('asistencias/agregar', { tipoPersona, pulsera, evento: evento[0], personaRegistrada });
     } catch (error) {
         console.log(error);
         next;
