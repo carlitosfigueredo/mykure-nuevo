@@ -122,5 +122,22 @@ router.post('/editar/:id', async(req, res, next) => {
 });
 
 
+router.get('/ver/:id', async(req, res, next) => {
+    const { id } = req.params;
+    try {
+        const evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id]);
+        const pulseras = await db.query('SELECT COUNT(pulsera.idPulsera) as entregadas FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento = ?', [id]);
+        const asistencia = await db.query('SELECT COUNT(asistenciaEvento.idPersona) as asistencias FROM asistenciaEvento JOIN persona ON asistenciaEvento.idPersona = persona.idPersona JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento = ?', [id]);
+        res.render('eventos/ver', { evento: evento[0], pulseras: pulseras[0], asistencia: asistencia[0] })
+
+    } catch (err) {
+        console.log(err);
+        req.flash('fail', 'Error al obtener datos. ' + err.code);
+        res.redirect('/eventos/todos');
+        next();
+    }
+})
+
+
 //Exportar modulos
 module.exports = router;

@@ -1,6 +1,48 @@
-
-
-{{#each integrantes}}
-
-
-{{/each}}
+<div class="report-center">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center mb-4">Viendo detalles de {{evento.nombreEvento}}</h2>
+            <div class="col-md-12 mb-4">
+                <a class="btn btn-block btn-success" href="/asistencias/agregar/evento/{{evento.idEvento}}">Click Aqui para agregar asistencias al evento</a>
+            </div>
+            <div class="col-md-3">
+                <div class="shadow p-3 mb-5 bg-body rounded">
+                    <div class="reports-titles-green">
+                        <p>Pulseras entregadas (Este Evento)</p>
+                    </div>
+                    <div class="reports-content">
+                        {{#if pulseras}}
+                        <h2 class="text-center mt-4">{{pulseras.entregadas}}</h2>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="shadow p-3 mb-5 bg-body rounded">
+                    <div class="reports-titles-red">
+                        <p>Asistentes del evento(HOY)</p>
+                    </div>
+                    <div class="reports-content line">
+                        {{#if asistencia}}
+                        <h2 class="text-center mt-4">{{asistencia.asistencias}}</h2>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="shadow p-3 mb-5 bg-body rounded">
+                    <div class="reports-titles-blue">
+                        <p>Ver los eventos secudarios</p>
+                    </div>
+                    <div class="row lista-eventos justify-content-center">
+                        {{#each eventosSecundarios}}
+                        <p>{{nombreEventoSecundario}}<a href="/asistencias/agregar/evento/{{idEventoSecudario}}"
+                                class="btn btn-sm btn-success">Ver Grupos Participantes</a></p>
+                        {{/each}}
+                        <a class="btn btn-info" href="/eventos-secundarios/todos">Ver Todos los eventos secundarios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
