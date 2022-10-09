@@ -98,3 +98,4 @@ router.post('/editar/:id', async(req, res, next) => {
 
 
 //Exportar modulos
+module.exports = router;
