@@ -60,12 +60,24 @@
     });
 </script>
 <script>
-	$('#modalEliminar').on('show.bs.modal', function (event) {
-	var linkEliminar = $(event.relatedTarget).data('eliminar');
-    console.log(linkEliminar);
-	$('#btnEliminar').on('click',function(e){
-		event.preventDefault();
-		$(this).attr("href", linkEliminar);
-	})
-});
+    $('#modalEliminar').on('show.bs.modal', function (event) {
+        var linkEliminar = $(event.relatedTarget).data('eliminar');
+        console.log(linkEliminar);
+        $('#btnEliminar').on('click', function (e) {
+            event.preventDefault();
+            $(this).attr("href", linkEliminar);
+        })
+    });
+</script>
+<script>
+        $('#modalSortear').on('show.bs.modal', function (event) {
+        var linkSortear = $(event.relatedTarget).data('sorteo');
+        var codigoGanador = $(event.relatedTarget).data('ganador');
+        var idPulsera = $(event.relatedTarget).data('id');
+        console.log(linkSortear);
+        $('#btnSortear').on('click', function (e) {
+            event.preventDefault();
+            $(this).attr("href", linkSortear);
+        })
+    });
 </script>

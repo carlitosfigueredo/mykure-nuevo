@@ -6,8 +6,8 @@ const db = require('./../database');
 //Metodo listar todos OK
 router.get('/', async(req, res) => {
     try {
-        const tutor = 2;
-        const grupo = await db.query("SELECT * FROM grupo LEFT JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo LEFT JOIN tutor ON tutoria.idTutor = tutor.idTutor");
+        const grupo = await db.query("SELECT grupo.idGrupo,grupo.nombreGrupo,tutor.idTutor,tutor.nombreCompletoTutor FROM grupo LEFT JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo LEFT JOIN tutor ON tutoria.idTutor = tutor.idTutor");
+        console.log(grupo);
         res.render('grupos/index', { grupo });
     } catch (error) {
         console.log(error);
@@ -17,7 +17,8 @@ router.get('/', async(req, res) => {
 
 router.get('/todos', async(req, res, next) => {
     try {
-        const grupo = await db.query("SELECT * FROM grupo LEFT JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo LEFT JOIN tutor ON tutoria.idTutor = tutor.idTutor");
+        const grupo = await db.query("SELECT grupo.idGrupo,grupo.nombreGrupo,tutor.idTutor,tutor.nombreCompletoTutor FROM grupo LEFT JOIN tutoria ON grupo.idGrupo = tutoria.idGrupo LEFT JOIN tutor ON tutoria.idTutor = tutor.idTutor");
+        console.log(grupo);
         res.render('grupos/index', { grupo });
     } catch (error) {
         console.log(error);
@@ -110,7 +111,7 @@ router.get('/asignar/:id', async(req, res, next) => {
     }
 });
 
-router.post('/asignar', async(req, res, next) => {
+router.post('/asignar/:id', async(req, res, next) => {
     const { idGrupo, idTutor } = req.body;
     console.log(req.body);
     newTutoria = {
@@ -120,7 +121,7 @@ router.post('/asignar', async(req, res, next) => {
     try {
         await db.query('INSERT INTO tutoria SET ?', [newTutoria]);
         req.flash('success', 'Tutor asignado correctamente al grupo');
-        res.redirect('/grupos/ver/' + idGrupo);
+        res.redirect('/grupos/todos');
     } catch (err) {
         console.log(err)
         req.flash('fail', 'Error' + err.code);

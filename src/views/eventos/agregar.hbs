@@ -1,14 +1,12 @@
 <div class="container p-5">
-    <img class="d-block mx-auto" width="100px" src="/img/logo-mykure.png" alt="Logo Mykure">
-    <h6 class="text-center">Mykure Control System</h6>
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form action="/eventos/agregar" method="POST" class="form-control">
-                <div class="form-control mb-3">
+            <form action="/eventos/agregar" method="POST" class="shadow p-3 mb-5 bg-body rounded">
+                <div class="shadow p-3 mb-5 bg-body rounded">
                     <label for="nombreEvento" class="form-label"> Ingrese el nombre del evento</label>
                     <input class="form-control" type="text" name="nombreEvento" id="nombreEvento" placeholder="Ejemplo: Semana Ingenieria - Dia 1" autofocus required>
                 </div>
-                <div class="form-control mb-3">
+                <div class="shadow p-3 mb-5 bg-body rounded">
                     <label for="idUbicacion" class="form-label"> Seleccione la ubicacion del evento</label>
                     <select name="idUbicacion" id="idUbicacion" class="form-select" required>
                         <option value="">Elegir</option>
@@ -17,7 +15,7 @@
                         {{/each}}
                     </select>
                 </div>
-                <div class="form-control mb-3">
+                <div class="shadow p-3 mb-5 bg-body rounded">
                     <label for="fechaEvento" class="form-label"> Ingrese la fecha del evento</label>
                     <input class="form-control" type="date" name="fechaEvento" id="fechaEvento" placeholder="Ejemplo: 2022-09-27" autofocus required>
                 </div>
