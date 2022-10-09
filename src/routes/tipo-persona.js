@@ -17,9 +17,10 @@ router.post('/agregar', async(req, res, next) => {
         await db.query("INSERT INTO tipoPersona SET ?", [newTipoPersona]);
         req.flash('success', 'El registro ha sido agregado correctamente.');
         res.redirect('/tipo-persona/todos');
-    } catch {
-        req.flash('fail', 'No se ha podido agregar. Intente nuevamente en seguida.')
-        console.log(error);
+    } catch (err) {
+        req.flash('fail', 'No se ha podido agregar. Intente nuevamente en seguida.');
+        res.redirect('/tipo-persona/agregar');
+        console.log(err);
         next();
     }
 
@@ -41,11 +42,12 @@ router.get('/eliminar/:id', async(req, res, next) => {
     const { id } = req.params;
     try {
         await db.query("DELETE FROM tipoPersona WHERE idTipoPersona = ?", [id]);
-        req.flash('success', 'El registro ha sido eliminado correctamente.');
+        req.flash('info', 'El registro ha sido eliminado correctamente.');
         res.redirect('/tipo-persona/todos');
-    } catch (error) {
-        req.flash('fail', 'No se ha podido eliminar. Intente nuevamente en seguida.')
-        console.log(error);
+    } catch (err) {
+        req.flash('fail', 'No se ha podido eliminar. Intente nuevamente en seguida.');
+        console.log(err);
+        res.redirect('/tipo-persona/todos');
         next();
     }
 });
@@ -53,8 +55,16 @@ router.get('/eliminar/:id', async(req, res, next) => {
 //Metodos Editar
 router.get('/editar/:id', async(req, res) => {
     const { id } = req.params;
-    const tipoPersona = await db.query('SELECT * FROM tipoPersona WHERE idTipoPersona =?', [id]);
-    res.render('tipo-persona/editar', { tipoPersona: tipoPersona[0] }); //para ver un solo objeto
+    try {
+        const tipoPersona = await db.query('SELECT * FROM tipoPersona WHERE idTipoPersona =?', [id]);
+        res.render('tipo-persona/editar', { tipoPersona: tipoPersona[0] }); //para ver un solo objeto
+    } catch (err) {
+        req.flash('fail', 'Error. ' + err.code);
+        console.log(err);
+        res.redirect('/tipo-persona/todos');
+        next();
+    }
+
 });
 
 router.post('/editar/:id', async(req, res, next) => {
@@ -65,11 +75,12 @@ router.post('/editar/:id', async(req, res, next) => {
     };
     try {
         await db.query("UPDATE tipoPersona SET ? WHERE idTipoPersona = ?", [newTipoPersona, id]);
-        req.flash('success', 'El registro ha sido editado correctamente.');
+        req.flash('warning', 'El registro ha sido editado correctamente.');
         res.redirect('/tipo-persona/todos');
-    } catch (error) {
-        req.flash('fail', 'No se ha podido editar. Intente nuevamente en seguida.')
-        console.log(error);
+    } catch (err) {
+        req.flash('fail', 'No se ha podido editar. Intente nuevamente en seguida.');
+        console.log(err);
+        res.redirect('/tipo-persona/todos');
         next();
     }
 
