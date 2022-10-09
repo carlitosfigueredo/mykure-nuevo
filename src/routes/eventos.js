@@ -62,9 +62,34 @@ router.get('/asistencia/:id', async(req, res, next) => {
 
 });
 
-router.get('/sorteo/evento/:id', async(req, res, next) => {
-    const { id } = req.params;
-    const pulseras = await db.query('');
+router.get('/sorteo/:id', async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        console.log({ id });
+        const evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id]);
+        console.log(evento);
+        const sorteo = await db.query('SELECT pulsera.idPulsera,pulsera.codigoPulsera,pulsera.estadoPulsera FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento =? and (pulsera.PulseraGanador = 0) and (estadoPulsera = "entregado")', [id]);
+        console.log(sorteo);
+        res.render('eventos/sorteo');
+    } catch (err) {
+        console.log(err);
+        next();
+    }
+});
+
+router.get('/sorteo/:id', async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        console.log({ id });
+        const evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id]);
+        console.log(evento);
+        const sorteo = await db.query('SELECT pulsera.idPulsera,pulsera.codigoPulsera,pulsera.estadoPulsera FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento =? and (pulsera.PulseraGanador = 0) and (estadoPulsera = "entregado")', [id]);
+        console.log(sorteo);
+        res.render('eventos/sorteo', { evento: evento[0] });
+    } catch (err) {
+        console.log(err);
+        next();
+    }
 });
 
 //Metodo Eliminar
@@ -76,13 +101,31 @@ router.get('/eliminar/:id', async(req, res, next) => {
         res.redirect('/eventos');
     } catch (err) {
         console.log(err);
-        req.flash('fail', 'Error. ' + err.code);
-        next();
+        if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+            req.flash('fail', 'No se puede eliminar el evento si hay datos cargados para el mismo');
+            res.redirect('/eventos');
+            next();
+        } else {
+            req.flash('fail', 'Error. ' + err.code);
+            res.redirect('/eventos');
+            next();
+        }
+
     };
 });
 
 router.get('/terminar/:id', async(req, res, next) => {
-
+    const { id } = req.params;
+    try {
+        await db.query('UPDATE evento SET estadoEvento = "terminado" WHERE idEvento =? ', [id])
+        req.flash('success', 'Evento Terminado');
+        res.redirect('/eventos');
+    } catch (err) {
+        console.log(err);
+        req.flash('fail', 'No se pudo terminar el evento. ' + err.code);
+        res.redirect('/eventos');
+        next();
+    };
 });
 //Metodos Editar
 router.get('/editar/:id', async(req, res, next) => {
@@ -95,9 +138,6 @@ router.get('/editar/:id', async(req, res, next) => {
         console.log(err);
         req.flash('fail', 'Error. ' + err.code);
     }
-    // const { id } = req.params;
-    // const lugar = await db.query('SELECT * FROM lugar WHERE idLugar =?', [id]);
-    // res.render('ubicaciones/editar', { lugar: lugar[0] }); //para ver un solo objeto
 });
 
 router.post('/editar/:id', async(req, res, next) => {
@@ -136,7 +176,7 @@ router.get('/ver/:id', async(req, res, next) => {
         res.redirect('/eventos/todos');
         next();
     }
-})
+});
 
 
 //Exportar modulos

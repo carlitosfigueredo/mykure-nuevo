@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="text-center">Todos los Eventos</h1>
-            <a href="/eventos/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo Evento</a>
+            <a href="/eventos/agregar" class="btn btn-block btn-success mb-5"><i class="bi bi-plus-circle"></i> Agregar nuevo Evento</a>
             {{#if eventos}}
             <table class="table" id="datatable">
                 <thead>
@@ -25,15 +25,18 @@
                         <td class="text-uppercase">{{estadoEvento}}</td>
                         <td>
                             <div class="btn-gruop">
-                                <a href="/asistencias/agregar/evento/{{idEvento}}" class="btn btn-sm btn-success">Cargar
+                                <a href="/asistencias/agregar/evento/{{idEvento}}" class="btn btn-sm btn-success"><i class="bi bi-plus-circle"></i> Cargar
                                     Asistencia</a>
                                 {{!-- <a href="/eventos/ver/{{idEvento}}" class="btn btn-sm btn-info">Ver Eventos
                                     Secundarios</a> --}}
-                                <a href="/eventos/asistencia/{{idEvento}}" class="btn btn-sm btn-info">Ver
+                                <a href="/eventos/asistencia/{{idEvento}}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i> Ver
                                     Asitencia-Pulseras</a>
-                                <a href="/eventos/editar/{{idEvento}}" class="btn btn-sm btn-warning">Editar evento</a>
-                                {{!-- <a href="/eventos/eliminar/{{idEvento}}" class="btn btn-sm btn-danger">Eliminar
-                                    evento</a> --}}
+                                <a href="/eventos/editar/{{idEvento}}" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i> Editar evento</a>
+                                <a data-bs-toggle="modal" data-bs-target="#modalEliminar" data-eliminar="/eventos/eliminar/{{idEvento}}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Eliminar
+                                    evento</a>
+                                <a href="/eventos/terminar/{{idEvento}}" class="btn btn-sm btn-danger"><i class="bi bi-dash-circle"></i> Terminar
+                                    evento</a>
+
                             </div>
                         </td>
                     </tr>
