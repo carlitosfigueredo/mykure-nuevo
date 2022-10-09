@@ -24,7 +24,6 @@ router.get('/todos', async(req, res, next) => {
         console.log(err);
         req.flash('fail', err.code);
         res.redirect('/pulseras/todos');
-
         next();
     }
 
@@ -35,7 +34,6 @@ router.get('/agregar', async(req, res) => {
     res.render('pulseras/agregar');
 });
 
-//Metodo Agregar //Metodo listar todos OK idPulsera     codigoPulsera   estadoPulsera   PulseraGanador
 router.post('/agregar', async(req, res, next) => {
     try {
         const { codigoPulsera, estadoPulsera, PulseraGanador } = req.body;
