@@ -23,6 +23,7 @@ router.post('/agregar', async(req, res, next) => {
         res.redirect('/ubicaciones/todos');
     } catch (error) {
         req.flash('fail', 'Error al intentar agregar la ubicacion, intente nuevamente en seguida.');
+        res.redirect('/ubicaciones/todos');
         next();
     }
 });
@@ -34,6 +35,7 @@ router.get('/', async(req, res, next) => {
         res.render('ubicaciones/index', { ubicaciones });
     } catch (error) {
         req.flash('fail', 'Error al intentar recuperar los registros, intente nuevamente en seguida.');
+        res.redirect('/ubicaciones/todos');
         next();
     }
 });
@@ -44,6 +46,7 @@ router.get('/todos', async(req, res) => {
         res.render('ubicaciones/index', { ubicaciones });
     } catch (error) {
         req.flash('fail', 'Error al intentar recuperar los registros, intente nuevamente en seguida.');
+        res.redirect('/ubicaciones/todos');
         next();
     }
 });
@@ -57,6 +60,7 @@ router.get('/eliminar/:id', async(req, res, next) => {
         res.redirect('/ubicaciones/todos');
     } catch (error) {
         req.flash('fail', 'Error al intentar eliminar, intente nuevamente en seguida.');
+        res.redirect('/ubicaciones/todos');
         next();
     }
 });
@@ -71,6 +75,7 @@ router.get('/editar/:id', async(req, res, next) => {
     } catch (error) {
         req.flash('fail', 'Error al intentar recuperar lo registros, intente nuevamente en seguida.');
         console.log(error);
+        res.redirect('/ubicaciones/todos');
         next();
     }
 
@@ -89,6 +94,8 @@ router.post('/editar/:id', async(req, res, next) => {
         req.flash('success', 'La ubicacion ha sido editada correctamente.');
         res.redirect('/ubicaciones/todos');
     } catch (error) {
+        req.flash('fail', 'Error al intentar editar, intente nuevamente en seguida.');
+        res.redirect('/ubicaciones/todos');
         next();
     }
 

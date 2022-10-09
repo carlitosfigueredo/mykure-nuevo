@@ -1,15 +1,11 @@
 <div class="container p-5">
-  <img
-    class="d-block mx-auto"    width="100px"    src="/img/logo-mykure.png"    alt="Logo Mykure"  />
-  <h6 class="text-center">Mykure Control System</h6>
   <div class="row">
     <div class="col-md-12">
       <h1 class="text-center">Todos las Ubicaciones</h1>
-      <a href="/ubicaciones/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo</a>
+      <a href="/ubicaciones/agregar" class="btn btn-block btn-success mb-5"><i class="bi bi-plus-circle"></i> Agregar nuevo</a>
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Nombre de la Ubicacion</th>
             <th scope="col">Descripcion de la Ubicacion</th>
             <th scope="col">Lugar Perteneciente</th>
@@ -19,14 +15,13 @@
         <tbody>
             {{#each ubicaciones}}
             <tr>    
-                <th scope="row">{{idUbicacion}}</th>
                 <td class="text-uppercase">{{nombreUbicacion}}</td>
                 <td class="text-uppercase">{{descripcionUbicacion}}</td>
                 <td class="text-uppercase">{{nombreLugar}}</td>
                 <td>
                     <div class="btn-gruop">
-                        <a href="/ubicaciones/editar/{{idUbicacion}}" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="/ubicaciones/eliminar/{{idUbicacion}}" class="btn btn-sm btn-danger">Eliminar</a>
+                        <a href="/ubicaciones/editar/{{idUbicacion}}" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i> Editar</a>
+                        <a data-bs-toggle="modal" data-bs-target="#modalEliminar" data-eliminar="/ubicaciones/eliminar/{{idUbicacion}}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Eliminar</a>
                     </div>
                 </td>
             </tr>
