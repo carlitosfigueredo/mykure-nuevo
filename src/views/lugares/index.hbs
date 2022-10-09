@@ -1,40 +1,52 @@
 <div class="container p-5">
-  <img
-    class="d-block mx-auto"
-    width="100px"
-    src="/img/logo-mykure.png"
-    alt="Logo Mykure"
-  />
-  <h6 class="text-center">Mykure Control System</h6>
-  <div class="row">
-    <div class="col-md-12">
-      <h1 class="text-center">Todos los lugares</h1>
-      <a href="/lugares/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo</a>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre del Lugar</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-            {{#each lugares}}
-            <tr>    
-                <th scope="row">{{idLugar}}</th>
-                <td class="text-uppercase">{{nombreLugar}}</td>
-                <td>
-                    <div class="btn-gruop">
-                        <a href="/lugares/editar/{{idLugar}}" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="/lugares/eliminar/{{idLugar}}" class="btn btn-sm btn-danger">Eliminar</a>
-                    </div>
-                </td>
-            </tr>
-            {{else}}
-            <h2 class="text-center">No existen registros :(</h2>
-            {{/each}}
-        </tbody>
-      </table>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="text-center">Todos los lugares</h1>
+			<a href="/lugares/agregar" class="btn btn-block btn-success mb-5">Agregar nuevo</a>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Nombre del Lugar</th>
+						<th scope="col">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each lugares}}
+					<tr>
+						<td class="text-uppercase">{{nombreLugar}}</td>
+						<td>
+							<div class="btn-gruop">
+								<a href="/lugares/editar/{{idLugar}}" class="btn btn-sm btn-warning">Editar</a>
+								<a data-bs-toggle="modal" data-bs-target="#modalEliminar" data-eliminar="/lugares/eliminar/{{idLugar}}" class="btn btn-sm btn-danger">Eliminar</a>
+							</div>
+						</td>
+					</tr>
+					{{else}}
+					<h2 class="text-center">No existen registros :(</h2>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
+
+
+<div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminar" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Mykure System dice:</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Esta seguro de eliminar este registros?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+				<a	class="btn btn-sm btn-danger" id="btnEliminar">Si, Eliminar Registro</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+

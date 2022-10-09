@@ -10,52 +10,62 @@
 <script>
     $(document).ready(function () {
         $('#idParticipante').select2(
-             {width: '100%'}
+            { width: '100%' }
         );
     });
     $(document).ready(function () {
         $('#idTutor').select2(
-             {width: '100%'}
+            { width: '100%' }
         );
     });
     $(document).ready(function () {
         $('#idGrupo').select2(
-             {width: '100%'}
+            { width: '100%' }
         );
     });
     $(document).ready(function () {
         $('#idUbicacion').select2(
-             {width: '100%'}
+            { width: '100%' }
         );
     });
     $(document).ready(function () {
         $('#alumno').select2(
-            {width: '100%'}
+            { width: '100%' }
         );
     });
     $(document).ready(function () {
         $('#idPulsera').select2(
-             {width: '100%'}
+            { width: '100%' }
         );
     });
     $(document).ready(function () {
         $('#idPulsera2').select2(
-             {width: '100%'}
+            { width: '100%' }
         );
     });
     $(document).ready(function () {
         $('#idTipoPersona').select2(
-             {width: '100%'}
+            { width: '100%' }
         );
     });
     $(document).ready(function () {
         $('#idPersonaRegistrada').select2(
-             {width: '100%'}
+            { width: '100%' }
         );
     });
     $(document).ready(function () {
         $('#alumno2').select2(
-             {width: '100%'}
+            { width: '100%' }
         );
     });
+</script>
+<script>
+	$('#modalEliminar').on('show.bs.modal', function (event) {
+	var linkEliminar = $(event.relatedTarget).data('eliminar');
+    console.log(linkEliminar);
+	$('#btnEliminar').on('click',function(e){
+		event.preventDefault();
+		$(this).attr("href", linkEliminar);
+	})
+});
 </script>
