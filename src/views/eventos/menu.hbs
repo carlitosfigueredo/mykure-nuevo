@@ -1,21 +1,7 @@
-<div class="container p-5">
-	{{!-- <div class="welcome">
+<div class="report-center">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-9">
-					<h1>Bienvenido al Sistema Mykure</h1>
-					<p>Todos los eventos en tus manos</p>
-				</div>
 				<div class="col-md-3">
-					<img width="150px" class="mx-auto d-block" src="/img/mykure-logo.png" alt="" />
-				</div>
-			</div>
-		</div>
-	</div> --}}
-	<div class="report-center">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-6">
 					<div class="shadow p-3 mb-5 bg-body rounded">
 						<div class="reports-titles-purple">
 							<p>Grupos</p>
@@ -29,7 +15,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-3">
 					<div class="shadow p-3 mb-5 bg-body rounded">
 						<div class="reports-titles-blue">
 							<p>Participantes</p>
@@ -41,32 +27,46 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-3">
 					<div class="shadow p-3 mb-5 bg-body rounded">
-						<div class="reports-titles-purple">
-							<p>Eventos Activos</p>
-						</div>
-						<div class="row lista-eventos justify-content-center">
-							{{#each eventos}}
-							<p>{{nombreEvento}}<a href="/eventos/ver/{{idEvento}}"
-									class="btn btn-sm btn-info">Ver Evento</a></p>
-							{{/each}}
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="shadow p-3 mb-5 bg-body rounded">
-						<div class="reports-titles-blue">
+						<div class="reports-titles-green">
 							<p>Pulseras entregadas</p>
 						</div>
-						<div class="row lista-eventos justify-content-center">
+						<div class="reports-content">
 							{{#if pulseras}}
 							<h2 class="text-center mt-4">{{pulseras.entregadas}}</h2>
 							{{/if}}
 						</div>
 					</div>
 				</div>
+				<div class="col-md-3">
+					<div class="shadow p-3 mb-5 bg-body rounded">
+						<div class="reports-titles-red">
+							<p>Ganancias del dia</p>
+						</div>
+						<div class="reports-content line">
+							{{#if ganancias}}
+							<h2 class="text-center mt-4">{{ganancias.gananciaPulsera}}</h2>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="shadow p-3 mb-5 bg-body rounded">
+						<div class="reports-titles-blue">
+							<p>Ver los eventos secudarios</p>
+						</div>
+						<div class="row lista-eventos justify-content-center">
+							{{#each eventosSecundarios}}
+							<p>{{nombreEventoSecundario}}<a href="/asistencias/agregar/evento/{{idEventoSecudario}}"
+									class="btn btn-sm btn-success">Ver Grupos Participantes</a></p>
+							{{/each}}
+							<a class="btn btn-info" href="/eventos-secundarios/todos">Ver Todos los eventos secundarios</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>

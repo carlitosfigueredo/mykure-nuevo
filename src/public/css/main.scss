@@ -45,6 +45,11 @@ body {
     padding: 30px;
 }
 
+.lista-eventos {
+    display: flex;
+    flex-direction: column;
+}
+
 .reports-titles-blue {
     display: flex;
     margin: 5px;
