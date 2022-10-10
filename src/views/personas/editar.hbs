@@ -1,0 +1,21 @@
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <p class="text-center">Editar Pulsera</p>
+            <form action="/personas/editar/pulsera/{{persona.idPersona}}" method="POST" class="form-control">
+                <div class="row">
+                    <label for="idPulsera" class="form-label"></label>
+                    <select name="idPulsera" class="form-select" id="idPulsera">
+                        <option value="">Elegir</option>
+                        {{#each pulseras}}
+                            <option value="{{idPulsera}}">{{codigoPulsera}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="row m-5">
+                    <button class="btn btn-block btn-success">Asignar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
