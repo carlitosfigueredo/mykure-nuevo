@@ -2,30 +2,21 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h1 class="text-center">Asistencia a evento {{evento.nombreEvento}}</h1>
-			{{!-- <a href="/eventos/agregar" class="btn btn-block btn-success mb-5">Agregar Asistencias</a> --}}
             {{#if asistencia}}
 			<table class="table" id="datatable">
 				<thead>
 					<tr>
-						<th scope="col">#</th>
 						<th scope="col">Nombre de la persona</th>
 						<th scope="col">Cedula</th>
                         <th scope="col">Pulsera</th>
-						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
 					{{#each asistencia}}
 					<tr>
-						<th scope="row">{{idPersona}}</th>
 						<td class="text-uppercase">{{nombreCompletoPersona}}</td>
                         <td class="text-uppercase">{{cedulaPersona}}</td>
 						<td class="text-uppercase">{{codigoPulsera}}</td>
-						<td>
-							<div class="btn-gruop">
-								
-							</div>
-						</td>
 					</tr>
 					{{/each}}
 				</tbody>
