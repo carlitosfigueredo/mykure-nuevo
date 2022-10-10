@@ -290,6 +290,7 @@ select {
 
 .sorteo-titulo {
     display: flex;
+    text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -298,9 +299,16 @@ select {
     color: #0369a1;
     font-weight: 700;
     .sorteo-desc {
+        text-align: center;
         display: inline;
         font-size: 50px;
         color: #6d28d9;
         font-weight: 500;
     }
+}
+
+.sorteo-ganadores {
+    font-size: 20px;
+    color: #0369a1;
+    font-weight: 500;
 }
