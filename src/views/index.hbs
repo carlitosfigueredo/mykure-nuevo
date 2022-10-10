@@ -28,32 +28,21 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<div class="shadow p-3 mb-5 bg-body rounded">
 						<div class="reports-titles-purple">
 							<p>Eventos Activos</p>
 						</div>
 						<div class="row lista-eventos justify-content-center">
 							{{#each eventos}}
-							<p>{{nombreEvento}}<a href="/eventos/ver/{{idEvento}}"
-									class="btn btn-sm btn-info">Ver Evento</a></p>
+							<p>{{nombreEvento}}<a href="/eventos/ver/{{idEvento}}" class="btn btn-sm btn-info">Ver
+									Evento</a></p>
 							{{/each}}
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="shadow p-3 mb-5 bg-body rounded">
-						<div class="reports-titles-blue">
-							<p>Pulseras entregadas</p>
-						</div>
-						<div class="row lista-eventos justify-content-center">
-							{{#if pulseras}}
-							<h2 class="text-center mt-4">{{pulseras.entregadas}}</h2>
-							{{/if}}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
