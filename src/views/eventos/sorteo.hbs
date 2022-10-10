@@ -6,7 +6,7 @@
             <div class="sorteador">
                 <div class="codigos" id="codigosPulseras">
                     {{#each codigos}}
-                    <p>{{codigoPulsera}}</p>
+                    <p class="ganadores">{{codigoPulsera}}</p>
                     {{/each}}
                 </div>
                 <a href="#" data-bs-toggle="modal" data-bs-target="#modalSortear" class="btn-sortear"
@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-md-8">
                             {{#each ganadores}}
-                            <p>{{nombreCompletoPersona}} - {{codigoPulsera}}</p>
+                            <p class="sorteo-ganadores">{{nombreCompletoPersona}} - {{codigoPulsera}}</p>
                             {{/each}}
                         </div>
                         <div class="col-md-2">
