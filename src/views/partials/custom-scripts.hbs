@@ -70,18 +70,6 @@
     });
 </script>
 <script>
-    $('#modalSortear').on('show.bs.modal', function (event) {
-        var linkSortear = $(event.relatedTarget).data('sorteo');
-        var codigoGanador = $(event.relatedTarget).data('ganador');
-        var idPulsera = $(event.relatedTarget).data('id');
-        console.log(linkSortear);
-        $('#btnSortear').on('click', function (e) {
-            event.preventDefault();
-            $(this).attr("href", linkSortear);
-        })
-    });
-</script>
-<script>
     $('#codigosPulseras').slotMachine({
         active: 0,
         delay: 10,

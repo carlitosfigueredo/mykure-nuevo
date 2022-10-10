@@ -168,10 +168,11 @@ select {
 
 .btn-continuar {
     background-color: #22c55e;
-    width: fit-content;
     color: white;
     font-size: 20px;
     font-weight: 400;
+    margin-left: 15px;
+    margin-right: 15px;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -180,9 +181,9 @@ select {
 }
 
 .btn-continuar:hover {
-    color: #22c55e;
+    color: #000;
     display: flex;
-    background-color: white;
+    background-color: #81ca9c;
 }
 
 .btn-si {
@@ -230,13 +231,14 @@ select {
     justify-content: center;
     align-items: center;
     .codigos {
+        width: 100%;
         border: 3px solid #be185d;
         margin: 20px;
-        height: 80px;
+        height: 240px;
         p {
             margin: 10px;
             text-align: center;
-            font-size: 75px;
+            font-size: 120px;
         }
     }
     .btn-sortear {
@@ -259,6 +261,46 @@ select {
     .btn-sortear:hover {
         text-decoration: none;
         color: #0d9488;
-        background-color: white;
+        background-color: #65d6cd;
+    }
+    .btn-ganadores {
+        margin-top: 25px;
+        padding: 10px 40px;
+        text-decoration: none;
+        background-color: #6b21a8;
+        display: flex;
+        color: white;
+        font-size: 20px;
+        font-weight: 400;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        border-radius: 5px;
+        border: none;
+        i {
+            margin-right: 5px;
+        }
+    }
+    .btn-ganadores:hover {
+        text-decoration: none;
+        color: #6b21a8;
+        background-color: #b47fdf;
+    }
+}
+
+.sorteo-titulo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    font-size: 24px;
+    color: #0369a1;
+    font-weight: 700;
+    .sorteo-desc {
+        display: inline;
+        font-size: 50px;
+        color: #6d28d9;
+        font-weight: 500;
     }
 }
