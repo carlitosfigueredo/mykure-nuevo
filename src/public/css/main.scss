@@ -168,7 +168,7 @@ select {
 
 .btn-continuar {
     background-color: #22c55e;
-    display: flex;
+    width: fit-content;
     color: white;
     font-size: 20px;
     font-weight: 400;
@@ -232,6 +232,7 @@ select {
     .codigos {
         border: 3px solid #be185d;
         margin: 20px;
+        height: 80px;
         p {
             margin: 10px;
             text-align: center;
@@ -239,17 +240,25 @@ select {
         }
     }
     .btn-sortear {
-        padding: 10px 25px;
+        padding: 10px 40px;
         text-decoration: none;
         background-color: #0d9488;
         display: flex;
         color: white;
         font-size: 20px;
         font-weight: 400;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         text-align: center;
         border-radius: 5px;
         border: none;
+        i {
+            margin-right: 5px;
+        }
+    }
+    .btn-sortear:hover {
+        text-decoration: none;
+        color: #0d9488;
+        background-color: white;
     }
 }

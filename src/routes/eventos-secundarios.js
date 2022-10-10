@@ -48,12 +48,27 @@ router.post('/agregar', async(req, res, next) => {
 });
 
 
+router.get('/ver/:id', async(req, res, next) => {
+    const { id } = req.params;
+    try {
+        const eventoSecundario = await db.query('SELECT * FROM eventoSecundario WHERE idEventoSecundario = ?', [id]);
+        res.render('eventos-secundarios/ver', { eventoSecundario });
+    } catch (err) {
+        console.log(err);
+        req.flash('fail', 'No se pudieron recuperar datos');
+    }
+})
+
+
 //Metodo Eliminar
 router.get('/eliminar/:id', async(req, res) => {
-    // const { id } = req.params;
-    // await db.query("DELETE FROM lugar WHERE idLugar = ?", [id]);
-    // req.flash('warning', 'El lugar ha sido eliminado correctamente.');
-    // res.redirect('/ubicaciones/todos');
+    const { id } = req.params;
+    try {
+
+    } catch (err) {
+        console.log(err);
+
+    }
 });
 
 //Metodos Editar

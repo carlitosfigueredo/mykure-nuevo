@@ -62,30 +62,31 @@ router.get('/asistencia/:id', async(req, res, next) => {
 
 });
 
-router.get('/sorteo/:id', async(req, res, next) => {
+router.post('/sorteo/guardar-ganador/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const idPulsera = req.body;
     try {
-        const { id } = req.params;
         console.log({ id });
-        const evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id]);
-        console.log(evento);
-        const sorteo = await db.query('SELECT pulsera.idPulsera,pulsera.codigoPulsera,pulsera.estadoPulsera FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento =? and (pulsera.PulseraGanador = 0) and (estadoPulsera = "entregado")', [id]);
-        console.log(sorteo);
-        res.render('eventos/sorteo');
+        db.query('UPDATE pulsera SET PulseraGanador = 1 WHERE idPulsera =? ', [idPulsera]);
+        req.flash('success', 'Ganador guardado correctamente')
+        res.redirect('/sorteo/' + id);
     } catch (err) {
         console.log(err);
+        req.flash('fail', err.code);
+        res.redirect('/sorteo/' + id);
         next();
     }
 });
 
 router.get('/sorteo/:id', async(req, res, next) => {
+    const { id } = req.params;
     try {
-        const { id } = req.params;
         console.log({ id });
         const evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id]);
-        console.log(evento);
-        const sorteo = await db.query('SELECT pulsera.idPulsera,pulsera.codigoPulsera,pulsera.estadoPulsera FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento =? and (pulsera.PulseraGanador = 0) and (estadoPulsera = "entregado")', [id]);
-        console.log(sorteo);
-        res.render('eventos/sorteo', { evento: evento[0] });
+        const codigos = await db.query('SELECT pulsera.idPulsera,pulsera.codigoPulsera,pulsera.estadoPulsera FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento WHERE evento.idEvento =? and (pulsera.PulseraGanador = 0) and (estadoPulsera = "entregado")', [id]);
+        const ganador = await db.query('SELECT pulsera.idPulsera,pulsera.codigoPulsera,pulsera.estadoPulsera,persona.nombreCompletoPersona,persona.cedulaPersona FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento JOIN persona ON asistenciaEvento.idPersona = persona.idPersona WHERE evento.idEvento =? and (pulsera.PulseraGanador = 0) and (estadoPulsera = "entregado") ORDER BY RAND() LIMIT 1', [id])
+        console.log(ganador);
+        res.render('eventos/sorteo', { evento: evento[0], codigos, ganador: ganador[0] });
     } catch (err) {
         console.log(err);
         next();
