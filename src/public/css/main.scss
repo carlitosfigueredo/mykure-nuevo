@@ -12,8 +12,22 @@ body {
 }
 
 #logo {
-    img {
-        width: 200px;
+    .logo-mykure {
+        img {
+            width: 200px;
+        }
+        svg {
+            display: block;
+            width: 250px;
+            height: 250px;
+            margin: auto;
+        }
+        .myku-animate {
+            animation: bounce;
+            /* referring directly to the animation's @keyframe declaration */
+            animation-duration: infinite;
+            /* don't forget to set a duration! */
+        }
     }
     h2 {
         font-weight: 700;
@@ -163,6 +177,12 @@ select {
     text-align: center;
     border-radius: 5px;
     border: none;
+}
+
+.btn-continuar:hover {
+    color: #22c55e;
+    display: flex;
+    background-color: white;
 }
 
 .btn-si {

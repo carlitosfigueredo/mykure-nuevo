@@ -7,7 +7,6 @@
 			<table class="table" id="datatable">
 				<thead>
 					<tr>
-						<th scope="col">#</th>
 						<th scope="col">Nombre del Evento Secundario</th>
 						<th scope="col">Acciones</th>
 					</tr>
@@ -15,13 +14,12 @@
 				<tbody>
 					{{#each eventosSecundarios}}
 					<tr>
-						<th scope="row">{{idEventoSecundario}}</th>
 						<td class="text-uppercase">{{nombreEventoSecundario}}</td>
 						<td>
 							<div class="btn-gruop">
-								<a href="/eventos/ver/{{idevento}}" class="btn btn-sm btn-info">Ver Grupos Participantes</a>
-								<a href="/eventos/editar/{{idevento}}" class="btn btn-sm btn-warning">Editar evento</a>
-								<a href="/eventos/eliminar/{{idevento}}" class="btn btn-sm btn-danger">Eliminar evento</a>
+								<a href="/grupo/ver/{{idGrupo}}" class="btn btn-sm btn-info">Ver Grupos Participantes</a>
+								<a href="/eventos-secundarios/editar/{{idEventoSecundario}}" class="btn btn-sm btn-warning">Editar evento</a>
+								<a href="/eventos-secundarios/eliminar/{{idEventoSecundario}}" class="btn btn-sm btn-danger">Eliminar evento</a>
 							</div>
 						</td>
 					</tr>

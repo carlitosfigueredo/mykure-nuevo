@@ -1,0 +1,37 @@
+<div class="container p-5">
+    <img class="d-block mx-auto" width="100px" src="/img/logo-mykure.png" alt="Logo Mykure">
+    <h6 class="text-center">Mykure Control System</h6>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <p class="text-center">Evento secundario para: {{evento.nombreEvento}}</p>
+            {{#if evento.idEvento}}
+                <form action="/eventos-secundarios/agregar/{{evento.idEvento}}" method="POST" class="form-control">
+                <input type="hidden" name="idEvento" value="{{evento.idEvento}}" >
+            {{else}}
+                <form action="/eventos-secundarios/agregar" method="POST" class="form-control">
+            {{/if}}
+                <div class="row mb-3">
+                    <label for="nombreEventoSecundario" class="form-label"> Ingrese el nombre del evento secundario</label>
+                    <input class="form-control" type="text" name="nombreEventoSecundario" id="nombreEventoSecundario" placeholder="Ejemplo: Semana Ingenieria - Dia 1" autofocus required>
+                </div>
+                <div class="row mb-3">
+                    <label for="descripcionEventoSecundario" class="form-label">Escriba una breve descripcion del evento secundario</label>
+                    <textarea name="descripcionEventoSecundario" rows="2" class="form-control"></textarea>
+                </div>
+                
+                <div class="row mb-3">
+                    <label for="idEvento" class="form-label"> Seleccione la ubicacion del evento secundario</label>
+                    <select name="idEvento" id="idEvento" class="form-select" required>
+                        <option value="">Elegir</option>
+                        {{#each eventos}}
+                            <option value="{{idEvento}}">{{nombreEvento}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="row mb-3">
+                    <button class="btn btn-block btn-success">Agregar Evento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

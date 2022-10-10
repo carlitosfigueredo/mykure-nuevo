@@ -5,8 +5,13 @@ const db = require('../database');
 
 //Metodo listar todos OK
 router.get('/', async(req, res) => {
-    const eventosSecundarios = await db.query('SELECT * FROM eventoSecundario')
-    res.render('eventos-secundarios/index', { eventosSecundarios });
+    try {
+        const eventosSecundarios = await db.query('SELECT * FROM eventoSecundario');
+        res.render('eventos-secundarios/index', { eventosSecundarios });
+    } catch (err) {
+
+    }
+
 });
 
 router.get('/todos', async(req, res) => {
