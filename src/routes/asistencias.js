@@ -35,6 +35,7 @@ router.post('/agregar/evento/:id', async(req, res, next) => {
         await db.query('ROLLBACK');
         console.log(err);
         req.flash('fail', 'Error. ' + err.code);
+        res.redirect('/asistencias/agregar/evento/' + idEvento);
         next();
     };
     var persona = await db.query('SELECT idPersona FROM persona WHERE cedulaPersona= ?', [cedulaPersona]);
@@ -53,11 +54,13 @@ router.post('/agregar/evento/:id', async(req, res, next) => {
         if (err.code === 'ER_DUP_ENTRY') {
             await db.query('ROLLBACK');
             req.flash('fail', 'Se ha encontrado un valor duplicado' + err.sqlMessage);
+            res.redirect('/asistencias/agregar/evento/' + idEvento);
             next();
         } else {
             await db.query('ROLLBACK');
             console.log('rollback realizado');
             req.flash('fail', 'Error. ' + err.code);
+            res.redirect('/asistencias/agregar/evento/' + idEvento);
             next();
         }
 
@@ -80,11 +83,13 @@ router.post('/agregar/registrados/evento/:id', async(req, res, next) => {
         if (err.code === 'ER_DUP_ENTRY') {
             await db.query('ROLLBACK');
             req.flash('fail', 'Se ha encontrado un valor duplicado' + err.sqlMessage);
+            res.redirect('/asistencias/agregar/evento/' + idEvento);
             next();
         } else {
             await db.query('ROLLBACK');
             console.log('rollback realizado');
             req.flash('fail', 'Error. ' + err.code);
+            res.redirect('/asistencias/agregar/evento/' + idEvento);
             next();
         }
     }
@@ -105,11 +110,13 @@ router.post('/agregar/alumno/registrados/evento/:id', async(req, res, next) => {
         if (err.code === 'ER_DUP_ENTRY') {
             await db.query('ROLLBACK');
             req.flash('fail', 'Se ha encontrado un valor duplicado' + err.sqlMessage);
+            res.redirect('/asistencias/agregar/evento/' + idEvento);
             next();
         } else {
             await db.query('ROLLBACK');
             console.log('rollback realizado');
             req.flash('fail', 'Error. ' + err.code);
+            res.redirect('/asistencias/agregar/evento/' + idEvento);
             next();
         }
     }
@@ -122,6 +129,7 @@ router.post('/agregar/alumno/nuevo/evento/:id', async(req, res, next) => {
         var alumnoData = await db.query('SELECT * FROM alumno WHERE idAlumno= ?', [idAlumno]);
     } catch (err) {
         req.flash('fail', err.code);
+        res.redirect('/asistencias/agregar/evento/' + idEvento);
         next();
     }
 
@@ -145,6 +153,7 @@ router.post('/agregar/alumno/nuevo/evento/:id', async(req, res, next) => {
         await db.query('ROLLBACK');
         console.log(err);
         req.flash('fail', 'Error. ' + err.code);
+        res.redirect('/asistencias/agregar/evento/' + idEvento);
         next();
     };
     var persona = await db.query('SELECT idPersona FROM persona WHERE cedulaPersona= ?', [cedulaPersona]);
@@ -163,11 +172,13 @@ router.post('/agregar/alumno/nuevo/evento/:id', async(req, res, next) => {
         if (err.code === 'ER_DUP_ENTRY') {
             await db.query('ROLLBACK');
             req.flash('fail', 'Se ha encontrado un valor duplicado' + err.sqlMessage);
+            res.redirect('/asistencias/agregar/evento/' + idEvento);
             next();
         } else {
             await db.query('ROLLBACK');
             console.log('rollback realizado');
             req.flash('fail', 'Error. ' + err.code);
+            res.redirect('/asistencias/agregar/evento/' + idEvento);
             next();
         }
     }
