@@ -96,6 +96,41 @@ router.get('/sorteo/:id', async(req, res, next) => {
     }
 });
 
+//sorteo especial
+
+router.post('/sorteo/especial/guardar-ganador/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const { idPulsera } = req.body;
+    try {
+        console.log({ id });
+        db.query('UPDATE pulsera SET PulseraGanador = 1 WHERE idPulsera =? ', [idPulsera]);
+        req.flash('success', 'Ganador guardado correctamente')
+        res.redirect('/eventos/sorteo/especial/' + id);
+    } catch (err) {
+        console.log(err);
+        req.flash('fail', err.code);
+        res.redirect('/eventos/sorteo/especial/' + id);
+        next();
+    }
+});
+
+router.get('/sorteo/especial/:id', async(req, res, next) => {
+    const { id } = req.params;
+    try {
+        console.log({ id });
+        const evento = await db.query('SELECT * FROM evento WHERE idEvento = ?', [id]);
+        const codigos = await db.query('SELECT pulsera.idPulsera,pulsera.codigoPulsera,pulsera.estadoPulsera,persona.nombreCompletoPersona FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento JOIN persona ON persona.idPersona = asistenciaEvento.idPersona WHERE evento.idEvento =? and (pulsera.PulseraGanador = 0) and (estadoPulsera = "entregado")', [id]);
+        console.log(codigos);
+        const ganador = await db.query('SELECT pulsera.idPulsera,pulsera.codigoPulsera,pulsera.estadoPulsera,persona.nombreCompletoPersona,persona.cedulaPersona FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento JOIN persona ON asistenciaEvento.idPersona = persona.idPersona WHERE evento.idEvento =? and (pulsera.PulseraGanador = 0) and (estadoPulsera = "entregado") ORDER BY RAND() LIMIT 1', [id]);
+        const ganadores = await db.query('SELECT pulsera.idPulsera,pulsera.codigoPulsera,pulsera.estadoPulsera,persona.nombreCompletoPersona,persona.cedulaPersona FROM pulsera JOIN asistenciaEvento ON asistenciaEvento.idPulsera = pulsera.idPulsera JOIN evento ON evento.idEvento = asistenciaEvento.idEvento JOIN persona ON asistenciaEvento.idPersona = persona.idPersona WHERE evento.idEvento =? and (pulsera.PulseraGanador = 1) and (estadoPulsera = "entregado")', [id]);
+        console.log(ganador);
+        res.render('eventos/sorteo-especial', { evento: evento[0], codigos, ganador: ganador[0], ganadores });
+    } catch (err) {
+        console.log(err);
+        next();
+    }
+});
+
 //Metodo Eliminar
 router.get('/eliminar/:id', async(req, res, next) => {
     const { id } = req.params;

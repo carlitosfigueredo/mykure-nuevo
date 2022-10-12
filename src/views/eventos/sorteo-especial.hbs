@@ -1,0 +1,105 @@
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center">Sorteo de Premios</h2>
+            <h4 class="text-center">Evento: {{evento.nombreEvento}} - ESPECIALES</h4>
+            <div class="sorteador">
+                <div class="codigos" id="codigosPulseras">
+                    {{#each codigos}}
+                    <p class="ganadores">{{nombreCompletoPersona}}</p>
+                    {{/each}}
+                </div>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalSortear" class="btn-sortear"
+                    id="btnSortear"><i class="bi bi-dice-6"></i>SORTEAR</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalGanadores" class="btn-ganadores"
+                    id="btnGanadores"><i class="bi bi-award"></i>VER GANADORES</a>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .modal {
+        background-color: #e0f2fe;
+    }
+</style>
+<div class="modal fade modal-lg" id="modalSortear" tabindex="-1" aria-labelledby="modalSortear" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mykure System dice:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img class="w-100 mx-auto d-block" src="/img/globos.png" alt="">
+                            <img class="w-100 mx-auto d-block" src="/img/regalo.png" alt="">
+                            <img class="w-100 mx-auto d-block" src="/img/globos.png" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            <h2 class="sorteo-titulo">Ganador del Sorteo: <p class="sorteo-desc">
+                                    {{ganador.nombreCompletoPersona}}</p>
+                            </h2>
+                            <h2 class="sorteo-titulo">Codigo Ganador del Sorteo: <p class="sorteo-desc">
+                                    {{ganador.codigoPulsera}}</p>
+                            </h2>
+                            <h2 class="sorteo-titulo">Cedula Ganador del Sorteo: <p class="sorteo-desc">
+                                    {{ganador.cedulaPersona}}</p>
+                            </h2>
+                        </div>
+                        <div class="col-md-2">
+                            <img class="w-100 mx-auto d-block" src="/img/regalo.png" alt="">
+                            <img class="w-100 mx-auto d-block" src="/img/globos.png" alt="">
+                            <img class="w-100 mx-auto d-block" src="/img/regalo.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form action="/eventos/sorteo/especial/guardar-ganador/{{evento.idEvento}}" method="post">
+                    <input type="hidden" name="idPulsera" value="{{ganador.idPulsera}}">
+                    <a href="/eventos/sorteo/especial/{{evento.idEvento}}" class="btn btn-info"><i class="bi bi-star"></i>
+                        Sortear nuevo premio</a>
+                    <button class="btn btn-sm btn-success"><i class="bi bi-emoji-smile"></i> Guardar
+                        Sorteo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-lg modal-dialog-scrollable" id="modalGanadores" tabindex="-1" aria-labelledby="modalGanadores" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ganadores Evento {{evento.nombreEvento}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img class="w-100 mx-auto d-block" src="/img/globos.png" alt="">
+                            <img class="w-100 mx-auto d-block" src="/img/regalo.png" alt="">
+                            <img class="w-100 mx-auto d-block" src="/img/globos.png" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            {{#each ganadores}}
+                            <p class="sorteo-ganadores">{{nombreCompletoPersona}} - {{cedulaPersona}}</p>
+                            {{/each}}
+                        </div>
+                        <div class="col-md-2">
+                            <img class="w-100 mx-auto d-block" src="/img/regalo.png" alt="">
+                            <img class="w-100 mx-auto d-block" src="/img/globos.png" alt="">
+                            <img class="w-100 mx-auto d-block" src="/img/regalo.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
